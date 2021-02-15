@@ -148,6 +148,10 @@
       <Project>{aca20956-abe3-43d0-93c9-01b2b08e85d5}</Project>
       <Name>AbstractAircraftFactoryLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AbstractFactoryFileImplement\AbstractFactoryFileImplement.csproj">
+      <Project>{b24b37b3-fa2b-4f03-a8a0-43a983e860fc}</Project>
+      <Name>AbstractFactoryFileImplement</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AbstractFactoryListImplement\AbstractFactoryListImplement.csproj">
       <Project>{babcd955-0948-458e-acf7-86a504904c95}</Project>
       <Name>AbstractFactoryListImplement</Name>
