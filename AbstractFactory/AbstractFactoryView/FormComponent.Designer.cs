@@ -81,7 +81,7 @@
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.labelName);
             this.Name = "FormComponent";
-            this.Text = "Компоненты";
+            this.Text = "Компонент";
             this.ResumeLayout(false);
             this.PerformLayout();
 
