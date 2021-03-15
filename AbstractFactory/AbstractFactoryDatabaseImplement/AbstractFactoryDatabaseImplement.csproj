@@ -5,10 +5,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9E0A386F-DE66-42CA-B107-662A3A0996C8}</ProjectGuid>
+    <ProjectGuid>{FB1B22FC-2BDC-4716-821A-41CE42EF79D0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>AbstractFactoryView</RootNamespace>
-    <AssemblyName>AbstractFactoryView</AssemblyName>
+    <RootNamespace>AbstractFactoryDatabaseImplement</RootNamespace>
+    <AssemblyName>AbstractFactoryDatabaseImplement</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -139,79 +139,29 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Container.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormAircraft.cs">
+    <Compile Include="AbstractFactoryDatabase.cs" />
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAircraft.Designer.cs">
-      <DependentUpon>FormAircraft.cs</DependentUpon>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormAircraftComponent.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Implements\AircraftStorage.cs" />
+    <Compile Include="Implements\ComponentStorage.cs" />
+    <Compile Include="Implements\OrderStorage.cs" />
+    <Compile Include="Migrations\20210228101835_InitialCreate.cs" />
+    <Compile Include="Migrations\20210228101835_InitialCreate.designer.cs">
+      <DependentUpon>20210228101835_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormAircraftComponent.Designer.cs">
-      <DependentUpon>FormAircraftComponent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormComponent.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormComponent.Designer.cs">
-      <DependentUpon>FormComponent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormComponents.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormComponents.Designer.cs">
-      <DependentUpon>FormComponents.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormCreateOrder.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormCreateOrder.Designer.cs">
-      <DependentUpon>FormCreateOrder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormAircrafts.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormAircrafts.Designer.cs">
-      <DependentUpon>FormAircrafts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormMain.Designer.cs">
-      <DependentUpon>FormMain.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\AbstractFactoryDatabaseModelSnapshot.cs" />
+    <Compile Include="Models\Aircraft.cs" />
+    <Compile Include="Models\AircraftComponent.cs" />
+    <Compile Include="Models\Component.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormAircraft.resx">
-      <DependentUpon>FormAircraft.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormAircraftComponent.resx">
-      <DependentUpon>FormAircraftComponent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormComponent.resx">
-      <DependentUpon>FormComponent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormComponents.resx">
-      <DependentUpon>FormComponents.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormCreateOrder.resx">
-      <DependentUpon>FormCreateOrder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormAircrafts.resx">
-      <DependentUpon>FormAircrafts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormMain.resx">
-      <DependentUpon>FormMain.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -240,10 +190,6 @@
       <Project>{aca20956-abe3-43d0-93c9-01b2b08e85d5}</Project>
       <Name>AbstractAircraftFactoryLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AbstractFactoryDatabaseImplement\AbstractFactoryDatabaseImplement.csproj">
-      <Project>{fb1b22fc-2bdc-4716-821a-41ce42ef79d0}</Project>
-      <Name>AbstractFactoryDatabaseImplement</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AbstractFactoryFileImplement\AbstractFactoryFileImplement.csproj">
       <Project>{b24b37b3-fa2b-4f03-a8a0-43a983e860fc}</Project>
       <Name>AbstractFactoryFileImplement</Name>
@@ -253,6 +199,7 @@
       <Name>AbstractFactoryListImplement</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.1.0.19235.1\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.1.0.19235.1\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
