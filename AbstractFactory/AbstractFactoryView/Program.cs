@@ -35,6 +35,8 @@ namespace AbstractFactoryView
             currentContainer.RegisterType<OrderLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<AircraftLogic>(new
            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IStorageStorage, StorageStorage>(new
+           HierarchicalLifetimeManager());
             return currentContainer;
         }
     }

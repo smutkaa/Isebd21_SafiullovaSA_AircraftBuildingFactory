@@ -48,11 +48,13 @@
   <ItemGroup>
     <Compile Include="Implements\AircraftStorage.cs" />
     <Compile Include="Implements\OrderStorage.cs" />
+    <Compile Include="Implements\StorageStorage.cs" />
     <Compile Include="Models\Aircraft.cs" />
     <Compile Include="Models\Component.cs" />
     <Compile Include="Implements\ComponentStorage.cs" />
     <Compile Include="DataListSingleton.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Storage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
