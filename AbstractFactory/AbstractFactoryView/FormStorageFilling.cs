@@ -11,10 +11,9 @@ namespace AbstractFactoryView
 {
     public partial class FormStorageFilling : Form
     {
-        StorageLogic logic;
+        StorageLogic _storageLogic;
         StorageBindingModel bm = new StorageBindingModel();
         public string ComponentName { get { return comboBoxComponent.Text; } }
-        StorageStorage _storageStorage = new StorageStorage();
 
         public int ComponentId
         {
@@ -40,7 +39,7 @@ namespace AbstractFactoryView
         public FormStorageFilling(ComponentLogic componentlogic, StorageLogic storageLogic)
         {
             InitializeComponent();
-            logic = storageLogic;
+            _storageLogic = storageLogic;
             List<ComponentViewModel> listComponent = componentlogic.Read(null);
             if (listComponent != null)
             {
@@ -81,7 +80,7 @@ namespace AbstractFactoryView
                 return;
             }
 
-            _storageStorage.Filling(bm, StorageId, ComponentId, Count, ComponentName);
+            _storageLogic.Filling(bm, StorageId, ComponentId, Count, ComponentName);
 
             DialogResult = DialogResult.OK;
             Close();
