@@ -125,33 +125,6 @@ namespace AbstractFactoryListImplement.Implements
             }
             return storage;
         }
-        public void Filling(StorageBindingModel model, int StorageId, int ComponentId, int Count, string ComponentName)
-        {
-            StorageViewModel view = GetElement(new StorageBindingModel
-            {
-                Id = StorageId
-            });
-
-            if (view != null)
-            {
-                model.StorageComponents = view.StorageComponent;
-                model.DateCreate = view.DateCreate;
-                model.Id = view.Id;
-                model.ResponsiblePerson = view.ResponsiblePerson;
-                model.StorageName = view.StorageName;
-            }
-
-            if (model.StorageComponents.ContainsKey(StorageId))
-            {
-                int count = model.StorageComponents[ComponentId].Item2;
-                model.StorageComponents[ComponentId] = (ComponentName, count + Count);
-            }
-            else
-            {
-                model.StorageComponents.Add(StorageId, (ComponentName, Count));
-            }
-            Update(model);
-        }
 
         private StorageViewModel CreateModel(Storage storage)
         {
