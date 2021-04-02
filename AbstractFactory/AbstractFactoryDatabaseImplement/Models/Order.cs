@@ -12,7 +12,9 @@ namespace AbstractFactoryDatabaseImplement.Models
     {
         public int Id { get; set; }
         public int AircraftId { get; set; }
+        public int ClientId { get; set; }
         public string AircraftName { get; set; }
+
         [Required]
         public int Count { get; set; }
         [Required]

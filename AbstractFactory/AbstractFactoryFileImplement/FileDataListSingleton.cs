@@ -17,16 +17,19 @@ namespace AbstractFactoryFileImplement
 		private readonly string ComponentFileName = "Component.xml";
 		private readonly string OrderFileName = "Order.xml";
 		private readonly string AircraftFileName = "Aircraft.xml";
+		private readonly string ClientFileName = "Client.xml";
 
 		public List<Component> Components { get; set; }
 		public List<Order> Orders { get; set; }
 		public List<Aircraft> Aircrafts { get; set; }
+		public List<Client> Clients { get; set; }
 
 		private FileDataListSingleton()
 		{
 			Components = LoadComponents();
 			Orders = LoadOrders();
 			Aircrafts = LoadAircrafts();
+			Clients = LoadClients();
 		}
 		public static FileDataListSingleton GetInstance()
 		{
@@ -42,6 +45,7 @@ namespace AbstractFactoryFileImplement
 			SaveComponents();
 			SaveOrders();
 			SaveAircrafts();
+			SaveClients();
 		}
 
 		private List<Component> LoadComponents()
@@ -130,6 +134,26 @@ namespace AbstractFactoryFileImplement
 			}
 			return list;
 		}
+		private List<Client> LoadClients()
+		{
+			var list = new List<Client>();
+			if (File.Exists(ClientFileName))
+			{
+				XDocument xDocument = XDocument.Load(ClientFileName);
+				var xElements = xDocument.Root.Elements("Client").ToList();
+				foreach (var elem in xElements)
+				{
+					list.Add(new Client
+					{
+						Id = Convert.ToInt32(elem.Attribute("Id").Value),
+						ClientName = elem.Element("ClientName").Value,
+						Login = elem.Element("Login").Value,
+						Password = elem.Element("Password").Value,
+					});
+				}
+			}
+			return list;
+		}
 		private void SaveComponents()
 		{
 			if (Components != null)
@@ -188,6 +212,23 @@ namespace AbstractFactoryFileImplement
 				}
 				XDocument xDocument = new XDocument(xElement);
 				xDocument.Save(AircraftFileName);
+			}
+		}
+		private void SaveClients()
+		{
+			if (Clients != null)
+			{
+				var xElement = new XElement("Clients");
+				foreach (var client in Clients)
+				{
+					xElement.Add(new XElement("Client",
+					new XAttribute("Id", client.Id),
+					new XElement("ClientName", client.ClientName),
+					new XElement("Login", client.Login),
+					new XElement("Password", client.Password)));
+				}
+				XDocument xDocument = new XDocument(xElement);
+				xDocument.Save(ClientFileName);
 			}
 		}
 	}

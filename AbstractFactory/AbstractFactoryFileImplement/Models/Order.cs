@@ -10,6 +10,7 @@ namespace AbstractFactoryFileImplement.Models
     class Order
     {
         public int Id { get; set; }
+        public int ClientId { get; set; }
         public int AircraftId { get; set; }
         public string AircraftName { get; set; }
         public int Count { get; set; }

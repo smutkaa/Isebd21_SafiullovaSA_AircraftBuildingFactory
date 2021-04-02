@@ -9,7 +9,7 @@ namespace AbstractFactoryDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=WIN-05LVFLG5M7P; Initial Catalog = AbstractFactoryDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=SIS08\SQLEXPRESS; Initial Catalog = AbstractFactoryDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -17,5 +17,6 @@ namespace AbstractFactoryDatabaseImplement
         public virtual DbSet<Aircraft> Aircrafts { set; get; }
         public virtual DbSet<AircraftComponent> AircraftComponents { set; get; }
         public virtual DbSet<Order> Orders { set; get; }
+        public virtual DbSet<Client> Clients { set; get; }
     }
 }

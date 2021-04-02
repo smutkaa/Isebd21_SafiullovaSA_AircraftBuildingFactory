@@ -16,6 +16,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
         {
             using (var context = new AbstractFactoryDatabase())
             {
+
                 return context.Aircrafts
                .Include(rec => rec.AircraftComponent)
                .ThenInclude(rec => rec.Component)

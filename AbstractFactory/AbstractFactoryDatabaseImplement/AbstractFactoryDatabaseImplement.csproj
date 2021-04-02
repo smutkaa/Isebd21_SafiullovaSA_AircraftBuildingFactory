@@ -160,15 +160,21 @@
   <ItemGroup>
     <Compile Include="AbstractFactoryDatabase.cs" />
     <Compile Include="Implements\AircraftStorage.cs" />
+    <Compile Include="Implements\ClientStorage.cs" />
     <Compile Include="Implements\ComponentStorage.cs" />
     <Compile Include="Implements\OrderStorage.cs" />
     <Compile Include="Migrations\20210228101835_InitialCreate.cs" />
     <Compile Include="Migrations\20210228101835_InitialCreate.designer.cs">
       <DependentUpon>20210228101835_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210329095025_addClient.cs" />
+    <Compile Include="Migrations\20210329095025_addClient.designer.cs">
+      <DependentUpon>20210329095025_addClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AbstractFactoryDatabaseModelSnapshot.cs" />
     <Compile Include="Models\Aircraft.cs" />
     <Compile Include="Models\AircraftComponent.cs" />
+    <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Component.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Program.cs" />
