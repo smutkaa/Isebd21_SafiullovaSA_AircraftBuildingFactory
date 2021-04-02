@@ -2,13 +2,14 @@
 using AbstractAircraftFactoryLogic.Interfaces;
 using AbstractAircraftFactoryLogic.ViewModels;
 using AbstractFactoryDatabaseImplement.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace AbstractFactoryDatabaseImplement.Implements
 {
-    class OrderStorage : IOrderStorage
+    public class OrderStorage : IOrderStorage
     {
         public List<OrderViewModel> GetFullList()
         {
@@ -17,7 +18,9 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 return context.Orders.Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
-                    AircraftName = context.Aircrafts.FirstOrDefault(r => r.Id == rec.AircraftId).AircraftName,
+                    AircraftName = context.Aircrafts
+                    .Include(x => x.Order)
+                    .FirstOrDefault(r => r.Id == rec.AircraftId).AircraftName,
                     AircraftId = rec.AircraftId,
                     Count = rec.Count,
                     Sum = rec.Sum,
@@ -42,7 +45,9 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
-                    AircraftName = context.Aircrafts.FirstOrDefault(r => r.Id == rec.AircraftId).AircraftName,
+                    AircraftName = context.Aircrafts
+                     .Include(x => x.Order)
+                     .FirstOrDefault(r => r.Id == rec.AircraftId).AircraftName,
                     AircraftId = rec.AircraftId,
                     Count = rec.Count,
                     Sum = rec.Sum,
@@ -68,7 +73,9 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 new OrderViewModel
                 {
                     Id = order.Id,
-                    AircraftName = context.Aircrafts.FirstOrDefault(r => r.Id == order.AircraftId).AircraftName,
+                    AircraftName = context.Aircrafts
+                     .Include(x => x.Order)
+                     .FirstOrDefault(r => r.Id == order.AircraftId).AircraftName,
                     AircraftId = order.AircraftId,
                     Count = order.Count,
                     Sum = order.Sum,
@@ -93,8 +100,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
         {
             using (var context = new AbstractFactoryDatabase())
             {
-                var element = context.Orders.FirstOrDefault(rec => rec.Id ==
-                model.Id);
+                var element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
                 if (element == null)
                 {
                     throw new Exception("Элемент не найден");
@@ -108,8 +114,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
         {
             using (var context = new AbstractFactoryDatabase())
             {
-                Order element = context.Orders.FirstOrDefault(rec => rec.Id ==
-                model.Id);
+                Order element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
                 if (element != null)
                 {
                     context.Orders.Remove(element);
