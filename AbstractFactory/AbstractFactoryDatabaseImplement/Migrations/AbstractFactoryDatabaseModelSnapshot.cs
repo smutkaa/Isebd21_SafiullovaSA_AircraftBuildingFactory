@@ -56,8 +56,7 @@ namespace AbstractFactoryDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AircraftId")
-                        .IsUnique();
+                    b.HasIndex("AircraftId");
 
                     b.HasIndex("ComponentId");
 
@@ -118,8 +117,8 @@ namespace AbstractFactoryDatabaseImplement.Migrations
             modelBuilder.Entity("AbstractFactoryDatabaseImplement.Models.AircraftComponent", b =>
                 {
                     b.HasOne("AbstractFactoryDatabaseImplement.Models.Aircraft", "Aircraft")
-                        .WithOne("AircraftComponents")
-                        .HasForeignKey("AbstractFactoryDatabaseImplement.Models.AircraftComponent", "AircraftId")
+                        .WithMany("AircraftComponent")
+                        .HasForeignKey("AircraftId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -132,8 +131,8 @@ namespace AbstractFactoryDatabaseImplement.Migrations
 
             modelBuilder.Entity("AbstractFactoryDatabaseImplement.Models.Order", b =>
                 {
-                    b.HasOne("AbstractFactoryDatabaseImplement.Models.Aircraft", "Aircraft")
-                        .WithMany("Orders")
+                    b.HasOne("AbstractFactoryDatabaseImplement.Models.Aircraft", null)
+                        .WithMany("Order")
                         .HasForeignKey("AircraftId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

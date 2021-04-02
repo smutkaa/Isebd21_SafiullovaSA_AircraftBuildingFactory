@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace AbstractFactoryDatabaseImplement.Implements
 {
-    class AircraftStorage : IAircraftStorage
+    public class AircraftStorage : IAircraftStorage
     {
         public List<AircraftViewModel> GetFullList()
         {
             using (var context = new AbstractFactoryDatabase())
             {
                 return context.Aircrafts
-                .Include(rec => rec.AircraftComponents)
+               .Include(rec => rec.AircraftComponent)
                .ThenInclude(rec => rec.Component)
                .ToList()
                .Select(rec => new AircraftViewModel
@@ -25,7 +25,8 @@ namespace AbstractFactoryDatabaseImplement.Implements
                    Id = rec.Id,
                    AircraftName = rec.AircraftName,
                    Price = rec.Price,
-                   AircraftComponents = rec.AircraftComponents.ToDictionary(recPC => recPC.ComponentId, recPC =>
+                   AircraftComponents = rec.AircraftComponent
+                   .ToDictionary(recPC => recPC.ComponentId, recPC =>
                   (recPC.Component?.ComponentName, recPC.Count))
                })
                .ToList();
@@ -40,7 +41,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
             using (var context = new AbstractFactoryDatabase())
             {
                 return context.Aircrafts
-                .Include(rec => rec.AircraftComponents)
+                .Include(rec => rec.AircraftComponent)
                .ThenInclude(rec => rec.Component)
                .Where(rec => rec.AircraftName.Contains(model.AircraftName))
                .ToList()
@@ -49,7 +50,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
                    Id = rec.Id,
                    AircraftName = rec.AircraftName,
                    Price = rec.Price,
-                   AircraftComponents = rec.AircraftComponents
+                   AircraftComponents = rec.AircraftComponent
                 .ToDictionary(recPC => recPC.ComponentId, recPC =>
 
                    (recPC.Component?.ComponentName, recPC.Count))
@@ -66,9 +67,9 @@ namespace AbstractFactoryDatabaseImplement.Implements
             using (var context = new AbstractFactoryDatabase())
             {
                 var aircraft = context.Aircrafts
-                .Include(rec => rec.AircraftComponents)
+                .Include(rec => rec.AircraftComponent)
                .ThenInclude(rec => rec.Component)
-               .FirstOrDefault(rec => rec.ProductName == model.AircraftName || rec.Id
+               .FirstOrDefault(rec => rec.AircraftName == model.AircraftName || rec.Id
                == model.Id);
                 return aircraft != null ?
                 new AircraftViewModel
@@ -76,7 +77,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
                     Id = aircraft.Id,
                     AircraftName = aircraft.AircraftName,
                     Price = aircraft.Price,
-                    AircraftComponents = aircraft.AircraftComponents
+                    AircraftComponents = aircraft.AircraftComponent
                 .ToDictionary(recPC => recPC.ComponentId, recPC =>
                (recPC.Component?.ComponentName, recPC.Count))
                 } :
@@ -91,8 +92,11 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 {
                     try
                     {
-                        context.Aircrafts.Add(CreateModel(model, new Aircraft(), context));
+                        Aircraft aircraft = CreateModel(model, new Aircraft());
+                        context.Aircrafts.Add(aircraft);
                         context.SaveChanges();
+                        aircraft = CreateModel(model, aircraft, context);
+
                         transaction.Commit();
                     }
                     catch
@@ -146,11 +150,19 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 }
             }
         }
+        private Aircraft CreateModel(AircraftBindingModel model, Aircraft aircraft)
+        {
+            aircraft.AircraftName = model.AircraftName;
+            aircraft.Price = model.Price;
+            return aircraft;
+        }
+
         private Aircraft CreateModel(AircraftBindingModel model, Aircraft aircraft,
        AbstractFactoryDatabase context)
         {
             aircraft.AircraftName = model.AircraftName;
             aircraft.Price = model.Price;
+
             if (model.Id.HasValue)
             {
                 var aircraftComponents = context.AircraftComponents.Where(rec =>
@@ -168,6 +180,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 }
                 context.SaveChanges();
             }
+
             // добавили новые
             foreach (var pc in model.AircraftComponents)
             {
@@ -177,7 +190,15 @@ namespace AbstractFactoryDatabaseImplement.Implements
                     ComponentId = pc.Key,
                     Count = pc.Value.Item2
                 });
-                context.SaveChanges();
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    MessageBox.Show(e?.InnerException?.Message, "Ошибка", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                }
             }
             return aircraft;
         }
