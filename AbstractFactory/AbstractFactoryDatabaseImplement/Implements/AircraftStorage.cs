@@ -17,7 +17,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
             using (var context = new AbstractFactoryDatabase())
             {
                 return context.Aircrafts
-                .Include(rec => rec.AircraftComponent)
+               .Include(rec => rec.AircraftComponent)
                .ThenInclude(rec => rec.Component)
                .ToList()
                .Select(rec => new AircraftViewModel
@@ -25,8 +25,9 @@ namespace AbstractFactoryDatabaseImplement.Implements
                    Id = rec.Id,
                    AircraftName = rec.AircraftName,
                    Price = rec.Price,
-                   AircraftComponents = rec.AircraftComponent.ToDictionary(recPC => recPC.ComponentId, recPC =>
-                  (recPC.Component?.ComponentName, recPC.Count))
+                   AircraftComponents = rec.AircraftComponent
+                .ToDictionary(recPC => recPC.ComponentId, recPC =>
+                (recPC.Component?.ComponentName, recPC.Count))
                })
                .ToList();
             }
@@ -50,9 +51,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
                    AircraftName = rec.AircraftName,
                    Price = rec.Price,
                    AircraftComponents = rec.AircraftComponent
-                .ToDictionary(recPC => recPC.ComponentId, recPC =>
-
-                   (recPC.Component?.ComponentName, recPC.Count))
+                   .ToDictionary(recPC => recPC.ComponentId, recPC => (recPC.Component?.ComponentName, recPC.Count))
                })
                .ToList();
             }
@@ -68,8 +67,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 var aircraft = context.Aircrafts
                 .Include(rec => rec.AircraftComponent)
                .ThenInclude(rec => rec.Component)
-               .FirstOrDefault(rec => rec.AircraftName == model.AircraftName || rec.Id
-               == model.Id);
+               .FirstOrDefault(rec => rec.AircraftName == model.AircraftName || rec.Id == model.Id);
                 return aircraft != null ?
                 new AircraftViewModel
                 {
@@ -79,8 +77,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
                     AircraftComponents = aircraft.AircraftComponent
                 .ToDictionary(recPC => recPC.ComponentId, recPC =>
                (recPC.Component?.ComponentName, recPC.Count))
-                } :
-               null;
+                } : null;
             }
         }
         public void Insert(AircraftBindingModel model)
@@ -149,14 +146,15 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 }
             }
         }
+
         private Aircraft CreateModel(AircraftBindingModel model, Aircraft aircraft)
         {
             aircraft.AircraftName = model.AircraftName;
             aircraft.Price = model.Price;
             return aircraft;
         }
-        private Aircraft CreateModel(AircraftBindingModel model, Aircraft aircraft,
-       AbstractFactoryDatabase context)
+
+        private Aircraft CreateModel(AircraftBindingModel model, Aircraft aircraft, AbstractFactoryDatabase context)
         {
             aircraft.AircraftName = model.AircraftName;
             aircraft.Price = model.Price;

@@ -36,6 +36,17 @@ namespace AbstractFactoryListImplement.Implements
                 return null;
             }
             List<OrderViewModel> result = new List<OrderViewModel>();
+            if (model.DateTo != null && model.DateFrom != null)
+            {
+                foreach (var order in source.Orders)
+                {
+                    if (order.DateCreate >= model.DateTo && order.DateCreate <= model.DateFrom)
+                    {
+                        result.Add(CreateModel(order));
+                    }
+                }
+                return result;
+            }
             foreach (var order in source.Orders)
             {
                 if (order.AircraftId == model.AircraftId)
@@ -111,6 +122,7 @@ namespace AbstractFactoryListImplement.Implements
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.AircraftId = model.AircraftId;
+           // order.AircraftName = model.AircraftName;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -121,27 +133,17 @@ namespace AbstractFactoryListImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
-            string aircraftName = null;
-
-            foreach (var aircraft in source.Aircraft)
-            {
-                if (aircraft.Id == order.AircraftId)
-                {
-                    aircraftName = aircraft.AircraftName;
-                }
-            }
-
             return new OrderViewModel
             {
                 Id = order.Id,
-                AircraftId = order.AircraftId,
-                Status = order.Status,
+                Count = order.Count,
                 Sum = order.Sum,
+                Status = order.Status,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
-                Count = order.Count,
-                AircraftName = aircraftName
-            };  
+                AircraftId = order.AircraftId,
+                AircraftName = source.Aircraft.FirstOrDefault(a => a.Id == order.AircraftId).AircraftName
+            };
         }
     } 
 }

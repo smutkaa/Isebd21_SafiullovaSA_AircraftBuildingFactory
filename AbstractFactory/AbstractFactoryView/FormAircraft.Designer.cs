@@ -192,7 +192,7 @@
             this.Controls.Add(this.buttonChange);
             this.Controls.Add(this.buttonAdd);
             this.Name = "FormAircraft";
-            this.Text = "Самолет";
+            this.Text = "FormAircraft";
             this.Load += new System.EventHandler(this.FormAircraft_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);

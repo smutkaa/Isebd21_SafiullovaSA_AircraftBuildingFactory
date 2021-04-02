@@ -49,8 +49,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
             using (var context = new AbstractFactoryDatabase())
             {
                 var component = context.Components
-                .FirstOrDefault(rec => rec.ComponentName == model.ComponentName ||
-               rec.Id == model.Id);
+                .FirstOrDefault(rec => rec.ComponentName == model.ComponentName || rec.Id == model.Id);
                 return component != null ?
                 new ComponentViewModel
                 {
@@ -72,8 +71,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
         {
             using (var context = new AbstractFactoryDatabase())
             {
-                var element = context.Components.FirstOrDefault(rec => rec.Id ==
-               model.Id);
+                var element = context.Components.FirstOrDefault(rec => rec.Id == model.Id);
                 if (element == null)
                 {
                     throw new Exception("Элемент не найден");

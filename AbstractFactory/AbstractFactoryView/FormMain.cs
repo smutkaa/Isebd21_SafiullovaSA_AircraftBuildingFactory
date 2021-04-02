@@ -13,10 +13,13 @@ namespace AbstractFactoryView
 		[Dependency]
 		public new IUnityContainer Container { get; set; }
 		private readonly OrderLogic _orderLogic;
-		public FormMain(OrderLogic orderLogic)
+		private readonly ReportLogic _report;
+		
+		public FormMain(OrderLogic orderLogic, ReportLogic report)
 		{
 			InitializeComponent();
 			this._orderLogic = orderLogic;
+			this._report = report;
 		}
 		private void FormMain_Load(object sender, EventArgs e)
 		{
@@ -116,8 +119,32 @@ namespace AbstractFactoryView
 
         private void ИзделияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormAircrafts>();
+            var form = Container.Resolve<FormDocument>();
             form.ShowDialog();
         }
-    }
+
+		private void списокИзделийToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+			{
+				if (dialog.ShowDialog() == DialogResult.OK)
+				{
+					_report.SaveAircraftsToWordFile(new ReportBindingModel { FileName = dialog.FileName });
+					MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				}
+			}
+		}
+
+		private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var form = Container.Resolve<FormClientOrders>();
+			form.ShowDialog();
+		}
+
+		private void изделияПоКомпонентамToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var form = Container.Resolve<FormReportAircraftComponents>();
+			form.ShowDialog();
+		}
+	}
 }

@@ -30,6 +30,18 @@ namespace AbstractFactoryFileImplement.Implements
             {
                 return null;
             }
+            if (model.DateFrom != null && model.DateTo != null)
+            {
+                return source.Orders
+                    .Where(rec => rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+                    .Select(CreateModel)
+                    .ToList();
+            }
+            else
+            {
+                return null;
+            }
+            
             return source.Orders
                 .Where(rec => rec.AircraftId
                 .ToString().Contains(model.AircraftId.ToString()))
@@ -90,6 +102,16 @@ namespace AbstractFactoryFileImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
+            string aircraftName = null;
+
+            foreach (var aircraft in source.Aircrafts)
+            {
+                if (aircraft.Id == order.AircraftId)
+                {
+                    aircraftName = aircraft.AircraftName;
+                }
+            }
+
             return new OrderViewModel
             {
                 Id = order.Id,
@@ -99,7 +121,7 @@ namespace AbstractFactoryFileImplement.Implements
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Count = order.Count,
-                AircraftName = source.Aircrafts.FirstOrDefault(rec => rec.Id == order.AircraftId)?.AircraftName
+                AircraftName = aircraftName
             };
         }
     }

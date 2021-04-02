@@ -2,10 +2,10 @@
 using AbstractAircraftFactoryLogic.Interfaces;
 using AbstractAircraftFactoryLogic.ViewModels;
 using AbstractFactoryDatabaseImplement.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace AbstractFactoryDatabaseImplement.Implements
 {
@@ -20,7 +20,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
                     Id = rec.Id,
                     AircraftName = context.Aircrafts
                     .Include(x => x.Order)
-                    .FirstOrDefault(r => r.Id == rec.AircraftId).AircraftName,
+                    .FirstOrDefault(x => x.Id == rec.AircraftId).AircraftName,
                     AircraftId = rec.AircraftId,
                     Count = rec.Count,
                     Sum = rec.Sum,
@@ -38,6 +38,27 @@ namespace AbstractFactoryDatabaseImplement.Implements
             {
                 return null;
             }
+            if (model.DateFrom != null && model.DateTo != null)
+            {
+                using (var context = new AbstractFactoryDatabase())
+                {
+                    return context.Orders.Where(rec => rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+                        .Select(rec => new OrderViewModel
+                        {
+                            Id = rec.Id,
+                            AircraftName = context.Aircrafts
+                            .Include(x => x.Order)
+                            .FirstOrDefault(x => x.Id == rec.AircraftId).AircraftName,
+                            AircraftId = rec.AircraftId,
+                            Count = rec.Count,
+                            Sum = rec.Sum,
+                            Status = rec.Status,
+                            DateCreate = rec.DateCreate,
+                            DateImplement = rec.DateImplement
+                        }).ToList();
+                }
+            }
+             
             using (var context = new AbstractFactoryDatabase())
             {
                 return context.Orders
@@ -46,8 +67,8 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 {
                     Id = rec.Id,
                     AircraftName = context.Aircrafts
-                     .Include(x => x.Order)
-                     .FirstOrDefault(r => r.Id == rec.AircraftId).AircraftName,
+                    .Include(x => x.Order)
+                    .FirstOrDefault(r => r.Id == rec.AircraftId).AircraftName,
                     AircraftId = rec.AircraftId,
                     Count = rec.Count,
                     Sum = rec.Sum,
@@ -57,6 +78,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 })
                 .ToList();
             }
+             
         }
 
         public OrderViewModel GetElement(OrderBindingModel model)
@@ -73,9 +95,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 new OrderViewModel
                 {
                     Id = order.Id,
-                    AircraftName = context.Aircrafts
-                     .Include(x => x.Order)
-                     .FirstOrDefault(r => r.Id == order.AircraftId).AircraftName,
+                    AircraftName = context.Aircrafts.FirstOrDefault(r => r.Id == order.AircraftId).AircraftName,
                     AircraftId = order.AircraftId,
                     Count = order.Count,
                     Sum = order.Sum,
@@ -100,7 +120,8 @@ namespace AbstractFactoryDatabaseImplement.Implements
         {
             using (var context = new AbstractFactoryDatabase())
             {
-                var element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+                var element = context.Orders.FirstOrDefault(rec => rec.Id ==
+                model.Id);
                 if (element == null)
                 {
                     throw new Exception("Элемент не найден");
@@ -114,7 +135,8 @@ namespace AbstractFactoryDatabaseImplement.Implements
         {
             using (var context = new AbstractFactoryDatabase())
             {
-                Order element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+                Order element = context.Orders.FirstOrDefault(rec => rec.Id ==
+                model.Id);
                 if (element != null)
                 {
                     context.Orders.Remove(element);

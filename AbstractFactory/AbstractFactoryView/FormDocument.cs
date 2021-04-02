@@ -7,13 +7,13 @@ using Unity;
 
 namespace AbstractFactoryView
 {
-	public partial class FormAircrafts : Form
+	public partial class FormDocument : Form
 	{
 		[Dependency]
 		public new IUnityContainer Container { get; set; }
 		private readonly AircraftLogic logic;
 
-		public FormAircrafts(AircraftLogic logic)
+		public FormDocument(AircraftLogic logic)
 		{
 			InitializeComponent();
 			this.logic = logic;
