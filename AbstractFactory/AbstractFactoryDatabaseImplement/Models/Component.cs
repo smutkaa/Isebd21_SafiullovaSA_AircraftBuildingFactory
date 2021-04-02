@@ -12,8 +12,8 @@ namespace AbstractFactoryDatabaseImplement.Models
     {
         public int Id { get; set; }
         [Required]
+        // поле обязательно к заполнению
         public string ComponentName { get; set; }
-
         [ForeignKey("ComponentId")]
         public virtual List<AircraftComponent> AircraftComponents { get; set; }
     }

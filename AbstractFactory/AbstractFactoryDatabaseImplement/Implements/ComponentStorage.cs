@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace AbstractFactoryDatabaseImplement.Implements
 {
-    public class ComponentStorage : IComponentStorage
+    class ComponentStorage : IComponentStorage
     {
         public List<ComponentViewModel> GetFullList()
         {
@@ -19,7 +19,8 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 {
                     Id = rec.Id,
                     ComponentName = rec.ComponentName
-                }).ToList();
+                })
+.ToList();
             }
         }
         public List<ComponentViewModel> GetFilteredList(ComponentBindingModel model)

@@ -5,11 +5,10 @@ using AbstractFactoryDatabaseImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 
 namespace AbstractFactoryDatabaseImplement.Implements
 {
-    public class OrderStorage : IOrderStorage
+    class OrderStorage : IOrderStorage
     {
         public List<OrderViewModel> GetFullList()
         {
@@ -18,9 +17,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 return context.Orders.Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
-                    AircraftName = context.Aircrafts
-                    .Include(x => x.Order)
-                    .FirstOrDefault(r => r.Id == rec.AircraftId).AircraftName,
+                    AircraftName = context.Aircrafts.FirstOrDefault(r => r.Id == rec.AircraftId).AircraftName,
                     AircraftId = rec.AircraftId,
                     Count = rec.Count,
                     Sum = rec.Sum,
@@ -45,9 +42,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
-                    AircraftName = context.Aircrafts
-                    .Include(x => x.Order)
-                    .FirstOrDefault(r => r.Id == rec.AircraftId).AircraftName,
+                    AircraftName = context.Aircrafts.FirstOrDefault(r => r.Id == rec.AircraftId).AircraftName,
                     AircraftId = rec.AircraftId,
                     Count = rec.Count,
                     Sum = rec.Sum,
@@ -73,9 +68,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 new OrderViewModel
                 {
                     Id = order.Id,
-                    AircraftName = context.Aircrafts
-                    .Include(x => x.Order)
-                    .FirstOrDefault(r => r.Id == order.AircraftId).AircraftName,
+                    AircraftName = context.Aircrafts.FirstOrDefault(r => r.Id == order.AircraftId).AircraftName,
                     AircraftId = order.AircraftId,
                     Count = order.Count,
                     Sum = order.Sum,
