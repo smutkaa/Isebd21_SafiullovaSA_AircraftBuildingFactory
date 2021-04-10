@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractFactoryFileImplemen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFactoryDatabaseImplement", "AbstractFactoryDatabaseImplement\AbstractFactoryDatabaseImplement.csproj", "{FB1B22FC-2BDC-4716-821A-41CE42EF79D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFactoryRestApi", "AbstractFactoryRestApi\AbstractFactoryRestApi.csproj", "{FBDF9CB6-8D00-4FB9-BA6C-6C8BDE4EBF84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractFactoryRestApi", "AbstractFactoryRestApi\AbstractFactoryRestApi.csproj", "{FBDF9CB6-8D00-4FB9-BA6C-6C8BDE4EBF84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFactoryAPIClient", "AbstractFactoryAPIClient\AbstractFactoryAPIClient.csproj", "{0ACE252D-6DFD-4D17-958D-582322B23EF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{FBDF9CB6-8D00-4FB9-BA6C-6C8BDE4EBF84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBDF9CB6-8D00-4FB9-BA6C-6C8BDE4EBF84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBDF9CB6-8D00-4FB9-BA6C-6C8BDE4EBF84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ACE252D-6DFD-4D17-958D-582322B23EF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ACE252D-6DFD-4D17-958D-582322B23EF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ACE252D-6DFD-4D17-958D-582322B23EF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ACE252D-6DFD-4D17-958D-582322B23EF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
