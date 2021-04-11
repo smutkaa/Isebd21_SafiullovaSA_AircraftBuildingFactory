@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using AbstractAircraftFactoryLogic.Enums;
 
 namespace AbstractFactoryDatabaseImplement.Implements
 {
@@ -42,16 +41,10 @@ namespace AbstractFactoryDatabaseImplement.Implements
             }
             using (var context = new AbstractFactoryDatabase())
             {
-                return context.Orders
-                    .Include(rec => rec.Aircraft)
-                    .Include(rec => rec.Client)
-                    .Include(rec => rec.Implementer)
-                .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
-                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date && 
-                rec.DateCreate.Date <= model.DateTo.Value.Date) ||
-                (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
-                (model.FreeOrders.HasValue && model.FreeOrders.Value && rec.Status == OrderStatus.Принят) ||
-                (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && rec.Status == OrderStatus.Выполняется))
+                return context.Orders.Include(rec => rec.Aircraft).Include(rec => rec.Client)
+                .Where(rec => (model.ClientId.HasValue && rec.ClientId == model.ClientId) || (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate == model.DateCreate) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date
+                >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date))
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
@@ -63,10 +56,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
                     DateCreate = rec.DateCreate,
                     DateImplement = rec.DateImplement,
                     ClientId = rec.ClientId,
-                    ClientName = rec.Client.ClientName,
-                    ImplementerId = rec.ImplementerId,
-                    ImplementerName = rec.ImplementerId.HasValue ? rec.Implementer.ImplementerName : string.Empty
-
+                    ClientName = rec.Client.ClientName
                 })
                 .ToList();
             }
@@ -94,9 +84,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
                     DateCreate = order.DateCreate,
                     DateImplement = order.DateImplement,
                     ClientId = order.ClientId,
-                    ClientName = order.Client.ClientName,
-                    ImplementerId = order.ImplementerId,
-                    ImplementerName = order.ImplementerId.HasValue ? order.Implementer.ImplementerName : string.Empty
+                    ClientName = order.Client.ClientName
                 } :
                 null;
             }
@@ -153,7 +141,6 @@ namespace AbstractFactoryDatabaseImplement.Implements
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
             order.ClientId = (int)model.ClientId;
-            order.ImplementerId = (int)model.ImplementerId;
             return order;
         }
     }

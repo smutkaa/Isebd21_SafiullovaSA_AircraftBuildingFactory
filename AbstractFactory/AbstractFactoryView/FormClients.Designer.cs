@@ -45,7 +45,6 @@ namespace AbstractFactoryView
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(407, 296);
             this.dataGridView.TabIndex = 9;
-          
             // 
             // buttoRef
             // 
