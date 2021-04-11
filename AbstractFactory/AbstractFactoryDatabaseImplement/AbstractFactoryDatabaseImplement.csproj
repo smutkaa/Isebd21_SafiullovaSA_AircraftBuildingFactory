@@ -165,6 +165,7 @@
     <Compile Include="Implements\AircraftStorage.cs" />
     <Compile Include="Implements\ClientStorage.cs" />
     <Compile Include="Implements\ComponentStorage.cs" />
+    <Compile Include="Implements\ImplementerStorage.cs" />
     <Compile Include="Implements\OrderStorage.cs" />
     <Compile Include="Migrations\20210228101835_InitialCreate.cs" />
     <Compile Include="Migrations\20210228101835_InitialCreate.designer.cs">
@@ -174,11 +175,16 @@
     <Compile Include="Migrations\20210411084520_createClient.designer.cs">
       <DependentUpon>20210411084520_createClient.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210411114009_createImplemetor.cs" />
+    <Compile Include="Migrations\20210411114009_createImplemetor.designer.cs">
+      <DependentUpon>20210411114009_createImplemetor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AbstractFactoryDatabaseModelSnapshot.cs" />
     <Compile Include="Models\Aircraft.cs" />
     <Compile Include="Models\AircraftComponent.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Component.cs" />
+    <Compile Include="Models\Implementer.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
