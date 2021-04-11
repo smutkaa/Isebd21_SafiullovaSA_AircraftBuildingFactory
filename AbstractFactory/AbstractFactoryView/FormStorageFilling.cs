@@ -4,16 +4,21 @@ using System.Windows.Forms;
 using AbstractAircraftFactoryLogic.BindingModels;
 using AbstractAircraftFactoryLogic.BusinessLogics;
 using AbstractAircraftFactoryLogic.ViewModels;
-using AbstractFactoryListImplement.Implements;
-
+using AbstractFactoryFileImplement.Implements;
 
 namespace AbstractFactoryView
 {
     public partial class FormStorageFilling : Form
     {
-        StorageLogic _storageLogic;
+        public FormStorageFilling()
+        {
+            InitializeComponent();
+        }
+
+        StorageLogic logic;
         StorageBindingModel bm = new StorageBindingModel();
         public string ComponentName { get { return comboBoxComponent.Text; } }
+        StorageStorage _storageStorage = new StorageStorage();
 
         public int ComponentId
         {
@@ -39,7 +44,7 @@ namespace AbstractFactoryView
         public FormStorageFilling(ComponentLogic componentlogic, StorageLogic storageLogic)
         {
             InitializeComponent();
-            _storageLogic = storageLogic;
+            logic = storageLogic;
             List<ComponentViewModel> listComponent = componentlogic.Read(null);
             if (listComponent != null)
             {
@@ -79,8 +84,6 @@ namespace AbstractFactoryView
                 MessageBoxIcon.Error);
                 return;
             }
-
-            _storageLogic.Filling(bm, StorageId, ComponentId, Count, ComponentName);
 
             DialogResult = DialogResult.OK;
             Close();

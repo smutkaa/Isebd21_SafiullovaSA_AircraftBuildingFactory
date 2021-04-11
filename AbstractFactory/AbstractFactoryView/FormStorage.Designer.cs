@@ -28,20 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.groupBoxComponent = new System.Windows.Forms.GroupBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.NameComponent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.labelName = new System.Windows.Forms.Label();
-            this.labelResponsiblePerson = new System.Windows.Forms.Label();
-            this.textBoxName = new System.Windows.Forms.TextBox();
             this.textBoxResponsiblePerson = new System.Windows.Forms.TextBox();
-            this.groupBoxComponent = new System.Windows.Forms.GroupBox();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.labelResponsiblePerson = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
             this.groupBoxComponent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Location = new System.Drawing.Point(399, 221);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 14;
+            this.buttonCancel.Text = "Отмена";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(298, 221);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 13;
+            this.buttonSave.Text = "Сохранить";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
+            // 
+            // groupBoxComponent
+            // 
+            this.groupBoxComponent.Controls.Add(this.dataGridView);
+            this.groupBoxComponent.Location = new System.Drawing.Point(241, 21);
+            this.groupBoxComponent.Name = "groupBoxComponent";
+            this.groupBoxComponent.Size = new System.Drawing.Size(263, 194);
+            this.groupBoxComponent.TabIndex = 12;
+            this.groupBoxComponent.TabStop = false;
+            this.groupBoxComponent.Text = "Детали на складе";
             // 
             // dataGridView
             // 
@@ -65,73 +94,43 @@
             this.Count.HeaderText = "Количество";
             this.Count.Name = "Count";
             // 
-            // labelName
+            // textBoxResponsiblePerson
             // 
-            this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(12, 51);
-            this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(57, 13);
-            this.labelName.TabIndex = 1;
-            this.labelName.Text = "Название";
+            this.textBoxResponsiblePerson.Location = new System.Drawing.Point(15, 112);
+            this.textBoxResponsiblePerson.Name = "textBoxResponsiblePerson";
+            this.textBoxResponsiblePerson.Size = new System.Drawing.Size(205, 20);
+            this.textBoxResponsiblePerson.TabIndex = 11;
+            // 
+            // textBoxName
+            // 
+            this.textBoxName.Location = new System.Drawing.Point(15, 63);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(205, 20);
+            this.textBoxName.TabIndex = 10;
             // 
             // labelResponsiblePerson
             // 
             this.labelResponsiblePerson.AutoSize = true;
-            this.labelResponsiblePerson.Location = new System.Drawing.Point(12, 110);
+            this.labelResponsiblePerson.Location = new System.Drawing.Point(12, 96);
             this.labelResponsiblePerson.Name = "labelResponsiblePerson";
             this.labelResponsiblePerson.Size = new System.Drawing.Size(144, 13);
-            this.labelResponsiblePerson.TabIndex = 2;
+            this.labelResponsiblePerson.TabIndex = 9;
             this.labelResponsiblePerson.Text = "ФИО ответственного лица";
             // 
-            // textBoxName
+            // labelName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(15, 77);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(205, 20);
-            this.textBoxName.TabIndex = 3;
-            // 
-            // textBoxResponsiblePerson
-            // 
-            this.textBoxResponsiblePerson.Location = new System.Drawing.Point(15, 126);
-            this.textBoxResponsiblePerson.Name = "textBoxResponsiblePerson";
-            this.textBoxResponsiblePerson.Size = new System.Drawing.Size(205, 20);
-            this.textBoxResponsiblePerson.TabIndex = 4;
-            // 
-            // groupBoxComponent
-            // 
-            this.groupBoxComponent.Controls.Add(this.dataGridView);
-            this.groupBoxComponent.Location = new System.Drawing.Point(241, 35);
-            this.groupBoxComponent.Name = "groupBoxComponent";
-            this.groupBoxComponent.Size = new System.Drawing.Size(263, 194);
-            this.groupBoxComponent.TabIndex = 5;
-            this.groupBoxComponent.TabStop = false;
-            this.groupBoxComponent.Text = "Детали на складе";
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.Location = new System.Drawing.Point(399, 235);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 7;
-            this.buttonCancel.Text = "Отмена";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
-            // 
-            // buttonSave
-            // 
-            this.buttonSave.Location = new System.Drawing.Point(298, 235);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 6;
-            this.buttonSave.Text = "Сохранить";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(12, 37);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(57, 13);
+            this.labelName.TabIndex = 8;
+            this.labelName.Text = "Название";
             // 
             // FormStorage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(516, 284);
+            this.ClientSize = new System.Drawing.Size(520, 280);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.groupBoxComponent);
@@ -140,10 +139,10 @@
             this.Controls.Add(this.labelResponsiblePerson);
             this.Controls.Add(this.labelName);
             this.Name = "FormStorage";
-            this.Text = "Создание склада";
+            this.Text = "FormStorage";
             this.Load += new System.EventHandler(this.FormStorage_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.groupBoxComponent.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,16 +150,15 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.Label labelName;
-        private System.Windows.Forms.Label labelResponsiblePerson;
-        private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.TextBox textBoxResponsiblePerson;
-        private System.Windows.Forms.GroupBox groupBoxComponent;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.GroupBox groupBoxComponent;
+        private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameComponent;
         private System.Windows.Forms.DataGridViewTextBoxColumn Count;
-        private System.DirectoryServices.DirectoryEntry directoryEntry1;
+        private System.Windows.Forms.TextBox textBoxResponsiblePerson;
+        private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.Label labelResponsiblePerson;
+        private System.Windows.Forms.Label labelName;
     }
 }

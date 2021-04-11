@@ -5,7 +5,7 @@ using AbstractAircraftFactoryLogic.ViewModels;
 using AbstractFactoryListImplement.Models;
 using System.Collections.Generic;
 using System.Linq;
-
+/*
 namespace AbstractFactoryListImplement.Implements
 {
     public class StorageStorage : IStorageStorage
@@ -125,10 +125,11 @@ namespace AbstractFactoryListImplement.Implements
             }
             return storage;
         }
-
+       
         private StorageViewModel CreateModel(Storage storage)
         {
-            Dictionary<int, (string, int)> storageComponents = new Dictionary<int, (string, int)>();
+            Dictionary<int, (string, int)> storageComponents = new
+            Dictionary<int, (string, int)>();
             foreach (var pc in storage.StorageComponents)
             {
                 string componentName = string.Empty;
@@ -148,8 +149,38 @@ namespace AbstractFactoryListImplement.Implements
                 StorageName = storage.StorageName,
                 ResponsiblePerson = storage.ResponsiblePerson,
                 DateCreate = storage.DateCreate,
-                StorageComponent = storageComponents
+                StorageComponents = storageComponents
             };
         }
+        public void Restocking(StorageBindingModel model, int StorageId, int ComponentId, int Count, string ComponentName)
+        {
+            StorageViewModel view = GetElement(new StorageBindingModel
+            {
+                Id = StorageId
+            });
+
+            if (view != null)
+            {
+                model.StorageComponents = view.StorageComponents;
+                model.DateCreate = view.DateCreate;
+                model.Id = view.Id;
+                model.ResponsiblePerson = view.ResponsiblePerson;
+                model.StorageName = view.StorageName;
+            }
+
+            if (model.StorageComponents.ContainsKey(ComponentId))
+            {
+                int count = model.StorageComponents[ComponentId].Item2;
+                model.StorageComponents[ComponentId] = (ComponentName, count + Count);
+            }
+            else
+            {
+                model.StorageComponents.Add(ComponentId, (ComponentName, Count));
+            }
+            Update(model);
+        }
+
+   
     }
 }
+    */

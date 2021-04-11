@@ -8,6 +8,11 @@ namespace AbstractFactoryView
 {
     public partial class FormStorages : Form
     {
+        public FormStorages()
+        {
+            InitializeComponent();
+        }
+
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
@@ -84,6 +89,5 @@ namespace AbstractFactoryView
         {
             LoadData();
         }
-
     }
 }

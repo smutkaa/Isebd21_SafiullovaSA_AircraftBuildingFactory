@@ -15,6 +15,6 @@ namespace AbstractFactoryListImplement.Models
         public string ResponsiblePerson { get; set; }
         public DateTime DateCreate { get; set; }
 
-        public Dictionary<int, int> StorageComponents { get; set; }
+        public Dictionary<int, int> StorageComponents { get; set; } 
     }
 }

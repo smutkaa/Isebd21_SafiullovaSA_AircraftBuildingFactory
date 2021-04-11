@@ -10,6 +10,7 @@ namespace AbstractFactoryView
 {
     public partial class FormStorage : Form
     {
+      
         [Dependency]
         public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
@@ -61,35 +62,7 @@ namespace AbstractFactoryView
             }
         }
 
-        private void FormStorage_Load(object sender, EventArgs e)
-        {
-            if (id.HasValue)
-            {
-                try
-                {
-                    StorageViewModel view = logic.Read(new StorageBindingModel { Id = id.Value })?[0];
-
-                    if (view != null)
-                    {
-                        textBoxName.Text = view.StorageName;
-                        textBoxResponsiblePerson.Text = view.ResponsiblePerson.ToString();
-                        storageComponents = view.StorageComponent;
-                        LoadData();
-                    }
-                }
-
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                }
-            }
-
-            else
-            {
-                storageComponents = new Dictionary<int, (string, int)>();
-            }
-        }
+        
         private void LoadData()
         {
             try
@@ -107,6 +80,36 @@ namespace AbstractFactoryView
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
+            }
+        }
+
+        private void FormStorage_Load(object sender, EventArgs e)
+        {
+            if (id.HasValue)
+            {
+                try
+                {
+                    StorageViewModel view = logic.Read(new StorageBindingModel { Id = id.Value })?[0];
+
+                    if (view != null)
+                    {
+                        textBoxName.Text = view.StorageName;
+                        textBoxResponsiblePerson.Text = view.ResponsiblePerson.ToString();
+                        storageComponents = view.StorageComponents;
+                        LoadData();
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                }
+            }
+
+            else
+            {
+                storageComponents = new Dictionary<int, (string, int)>();
             }
         }
     }

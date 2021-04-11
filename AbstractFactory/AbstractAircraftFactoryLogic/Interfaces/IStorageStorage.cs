@@ -12,5 +12,7 @@ namespace AbstractAircraftFactoryLogic.Interfaces
         void Insert(StorageBindingModel model);
         void Update(StorageBindingModel model);
         void Delete(StorageBindingModel model);
+        void Availability(StorageBindingModel houseBindingModel, int StorageId, int ComponentId, int Count, string ComponentName);
+        bool Extract(int AircraftCount, int AircraftId);
     }
 }

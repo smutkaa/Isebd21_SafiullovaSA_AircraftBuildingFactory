@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using AbstractAircraftFactoryLogic.BusinessLogics;
 using AbstractAircraftFactoryLogic.Interfaces;
-using AbstractFactoryListImplement.Implements;
+using AbstractFactoryFileImplement.Implements;
 using Unity;
 using Unity.Lifetime;
 
@@ -14,6 +14,7 @@ namespace AbstractFactoryView
         /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
+
         static void Main()
         {
             var container = BuildUnityContainer();
@@ -36,7 +37,7 @@ namespace AbstractFactoryView
             currentContainer.RegisterType<AircraftLogic>(new
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<IStorageStorage, StorageStorage>(new
-           HierarchicalLifetimeManager());
+         HierarchicalLifetimeManager());
             return currentContainer;
         }
     }

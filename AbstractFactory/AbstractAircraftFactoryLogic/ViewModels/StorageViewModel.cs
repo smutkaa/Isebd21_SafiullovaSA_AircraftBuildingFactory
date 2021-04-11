@@ -15,6 +15,7 @@ namespace AbstractAircraftFactoryLogic.ViewModels
         [DisplayName("Дата создания")]
         public DateTime DateCreate { get; set; }
 
-        public Dictionary<int, (string, int)> StorageComponent { get; set; }
+        public Dictionary<int, (string, int)> StorageComponents { get; set; }
     }
 }
+

@@ -10,10 +10,12 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 	public class OrderLogic
 	{
 		private readonly IOrderStorage _orderStorage;
-		public OrderLogic(IOrderStorage orderStorage)
+        private readonly IStorageStorage _storageStorage;
+        public OrderLogic(IOrderStorage orderStorage, IStorageStorage storageStorage)
 		{
 			_orderStorage = orderStorage;
-		}
+            _storageStorage = storageStorage;
+        }
 		public List<OrderViewModel> Read(OrderBindingModel model)
 		{
 			if (model == null)
@@ -44,9 +46,13 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 			{
 				throw new Exception("Не найден заказ");
 			}
-			if (order.Status != OrderStatus.Принят)
+			if (!_storageStorage.Extract(order.Count, order.AircraftId))
 			{
-				throw new Exception("Заказ не в статусе \"Принят\"");
+				throw new Exception("Компонентов не достаточно");
+			}
+			if (order == null)
+			{
+				throw new Exception("Не найден заказ");
 			}
 			_orderStorage.Update(new OrderBindingModel
 			{

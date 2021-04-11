@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace AbstractAircraftFactoryLogic.BindingModels
+namespace AbstractFactoryFileImplement.Models
 {
-    public class StorageBindingModel
+    public class Storage
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
+
         public string StorageName { get; set; }
+
         public string ResponsiblePerson { get; set; }
         public DateTime DateCreate { get; set; }
-        public Dictionary<int, (string, int)> StorageComponents { get; set; }
+
+        public Dictionary<int, int> StorageComponents { get; set; } 
     }
 }
