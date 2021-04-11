@@ -13,6 +13,8 @@ namespace AbstractFactoryDatabaseImplement.Models
         public int Id { get; set; }
         public int AircraftId { get; set; }
         public int ClientId { get; set; }
+
+        public int? ImplementerId { get; set; }
         public string AircraftName { get; set; }
 
         [Required]
@@ -27,5 +29,6 @@ namespace AbstractFactoryDatabaseImplement.Models
         public virtual Aircraft Aircraft { get; set; }
 
         public virtual Client Client { get; set; }
+        public virtual Implementer Implementer { get; set; }
     }
 }

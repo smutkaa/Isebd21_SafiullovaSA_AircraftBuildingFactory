@@ -15,11 +15,17 @@ namespace AbstractAircraftFactoryLogic.ViewModels
         [DataMember]
         public int AircraftId { get; set; }
         [DataMember]
+        public int? ImplementerId { get; set; }
+
+        [DataMember]
         [DisplayName("Изделие")]
         public string AircraftName { get; set; }
         [DataMember]
         [DisplayName("Клиент")]
         public string ClientName { get; set; }
+        [DataMember]
+        [DisplayName("Исполнитель")]
+        public string ImplementerName { get; set; }
         [DataMember]
         [DisplayName("Количество")]
         public int Count { get; set; }

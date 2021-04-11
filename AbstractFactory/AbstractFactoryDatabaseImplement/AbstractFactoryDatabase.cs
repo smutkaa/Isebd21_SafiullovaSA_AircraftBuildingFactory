@@ -18,5 +18,6 @@ namespace AbstractFactoryDatabaseImplement
         public virtual DbSet<AircraftComponent> AircraftComponents { set; get; }
         public virtual DbSet<Order> Orders { set; get; }
         public virtual DbSet<Client> Clients { set; get; }
+        public virtual DbSet<Implementer> Implementers { set; get; }
     }
 }
