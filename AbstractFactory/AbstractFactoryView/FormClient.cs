@@ -20,13 +20,13 @@ namespace AbstractFactoryView
 
         public int Id { set { id = value; } }
 
-        private readonly ClientLogic logic;
+        private readonly ClientLogic logicC;
 
         private int? id;
-        public FormClient()
+        public FormClient(ClientLogic logic)
         {
             InitializeComponent();
-            this.logic = logic;
+            this.logicC = logic;
         }
 
         private void FormClient_Load(object sender, EventArgs e)
@@ -35,7 +35,7 @@ namespace AbstractFactoryView
             {
                 try
                 {
-                    var view = logic.Read(new ClientBindingModel { Id = id })?[0];
+                    var view = logicC.Read(new ClientBindingModel { Id = id })?[0];
                     if (view != null)
                     {
                         textBoxName.Text = view.ClientName;
@@ -68,7 +68,7 @@ namespace AbstractFactoryView
             }
             try
             {
-                logic.CreateOrUpdate(new ClientBindingModel
+                logicC.CreateOrUpdate(new ClientBindingModel
                 {
                     Id = id,
                     ClientName = textBoxName.Text,

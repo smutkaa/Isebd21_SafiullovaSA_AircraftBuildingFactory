@@ -121,7 +121,7 @@ namespace AbstractFactoryView
             this.Controls.Add(this.labelLogin);
             this.Controls.Add(this.labelName);
             this.Name = "FormClient";
-            this.Text = "FormClient";
+            this.Text = "Создание клиента";
             this.Load += new System.EventHandler(this.FormClient_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

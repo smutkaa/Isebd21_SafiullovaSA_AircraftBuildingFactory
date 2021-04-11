@@ -170,6 +170,10 @@
     <Compile Include="Migrations\20210228101835_InitialCreate.designer.cs">
       <DependentUpon>20210228101835_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210411084520_createClient.cs" />
+    <Compile Include="Migrations\20210411084520_createClient.designer.cs">
+      <DependentUpon>20210411084520_createClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AbstractFactoryDatabaseModelSnapshot.cs" />
     <Compile Include="Models\Aircraft.cs" />
     <Compile Include="Models\AircraftComponent.cs" />
