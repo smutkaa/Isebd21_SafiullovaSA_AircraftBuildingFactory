@@ -34,7 +34,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
             }
             using (var context = new AbstractFactoryDatabase())
             {
-                return context.Clients.Include(x => x.Order)
+                return context.Clients
                 .Where(rec => rec.Login == model.Login && rec.Password == rec.Password)
                 .Select(rec => new ClientViewModel
                 {

@@ -48,7 +48,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
-                    AircraftName = context.Aircrafts.Include(x => x.Order).FirstOrDefault(r => r.Id == rec.AircraftId).AircraftName,
+                    AircraftName = rec.Aircraft.AircraftName,
                     AircraftId = rec.AircraftId,
                     Count = rec.Count,
                     Sum = rec.Sum,
@@ -76,7 +76,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 new OrderViewModel
                 {
                     Id = order.Id,
-                    AircraftName = context.Aircrafts.FirstOrDefault(r => r.Id == order.AircraftId).AircraftName,
+                    AircraftName = order.Aircraft.AircraftName,
                     AircraftId = order.AircraftId,
                     Count = order.Count,
                     Sum = order.Sum,

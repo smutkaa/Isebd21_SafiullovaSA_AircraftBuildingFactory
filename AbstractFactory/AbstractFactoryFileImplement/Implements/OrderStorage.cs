@@ -33,8 +33,7 @@ namespace AbstractFactoryFileImplement.Implements
 
             return source.Orders
                  .Where(rec => (model.ClientId.HasValue && rec.ClientId == model.ClientId) || (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate == model.DateCreate) ||
-                 (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date
-                 >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date))
+                 (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date))
                  .Select(CreateModel).ToList();
         }
 
@@ -44,8 +43,7 @@ namespace AbstractFactoryFileImplement.Implements
             {
                 return null;
             }
-            var order = source.Orders
-                .FirstOrDefault(rec => rec.AircraftId == model.AircraftId || rec.Id == model.Id);
+            var order = source.Orders.FirstOrDefault(rec => rec.AircraftId == model.AircraftId || rec.Id == model.Id);
             return order != null ? CreateModel(order) : null;
         }
 
@@ -82,6 +80,7 @@ namespace AbstractFactoryFileImplement.Implements
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.AircraftId = model.AircraftId;
+            order.ClientId = model.ClientId;
             order.Status = model.Status;
             order.Sum = model.Sum;
             order.DateCreate = model.DateCreate;
@@ -92,26 +91,18 @@ namespace AbstractFactoryFileImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
-            string aircraftName = null;
-
-            foreach (var aircraft in source.Aircrafts)
-            {
-                if (aircraft.Id == order.AircraftId)
-                {
-                    aircraftName = aircraft.AircraftName;
-                }
-            }
-
             return new OrderViewModel
             {
                 Id = order.Id,
                 AircraftId = order.AircraftId,
+                ClientId = order.ClientId,
                 Status = order.Status,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Count = order.Count,
-                AircraftName = aircraftName
+                AircraftName = source.Aircrafts.FirstOrDefault(rec => rec.Id == order.AircraftId)?.AircraftName,
+                ClientName = source.Clients.FirstOrDefault(rec => rec.Id == order.ClientId)?.ClientName
             };
         }
     }

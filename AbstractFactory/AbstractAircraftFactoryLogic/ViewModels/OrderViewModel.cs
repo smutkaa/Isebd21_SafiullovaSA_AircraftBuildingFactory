@@ -11,7 +11,7 @@ namespace AbstractAircraftFactoryLogic.ViewModels
         [DataMember]
         public int Id { get; set; }
         [DataMember]
-        public int ClientId { get; set; }
+        public int? ClientId { get; set; }
         [DataMember]
         public int AircraftId { get; set; }
         [DataMember]
