@@ -32,7 +32,6 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 .ToList();
             }
         }
-
         public List<OrderViewModel> GetFilteredList(OrderBindingModel model)
         {
             if (model == null)
