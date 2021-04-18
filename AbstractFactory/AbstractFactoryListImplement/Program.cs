@@ -10,7 +10,7 @@ namespace AbstractFactoryListImplement
     {
         /// <summary>
         /// Главная точка входа для приложения.
-        /// </summary>
+        /// </summary>c
         [STAThread]
         static void Main()
         {

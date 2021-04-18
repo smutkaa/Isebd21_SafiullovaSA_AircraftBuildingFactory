@@ -101,7 +101,7 @@
             this.Controls.Add(this.labelCount);
             this.Controls.Add(this.labelComp);
             this.Name = "FormAircraftComponent";
-            this.Text = "FormAircraftComponent";
+            this.Text = "Компоненты самолета";
             this.ResumeLayout(false);
             this.PerformLayout();
 

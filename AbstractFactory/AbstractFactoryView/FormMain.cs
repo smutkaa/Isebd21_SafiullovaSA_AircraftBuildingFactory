@@ -119,7 +119,7 @@ namespace AbstractFactoryView
 
         private void ИзделияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormDocument>();
+            var form = Container.Resolve<FormAircrafts>();
             form.ShowDialog();
         }
 

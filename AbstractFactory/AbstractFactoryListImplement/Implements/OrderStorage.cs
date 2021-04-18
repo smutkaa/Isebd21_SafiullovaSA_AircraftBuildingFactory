@@ -36,25 +36,15 @@ namespace AbstractFactoryListImplement.Implements
                 return null;
             }
             List<OrderViewModel> result = new List<OrderViewModel>();
-            if (model.DateTo != null && model.DateFrom != null)
-            {
-                foreach (var order in source.Orders)
+
+                foreach (var component in source.Orders)
                 {
-                    if (order.DateCreate >= model.DateTo && order.DateCreate <= model.DateFrom)
+                    if (component.DateCreate >= model.DateTo && component.DateCreate <= model.DateFrom)
                     {
-                        result.Add(CreateModel(order));
+                        result.Add(CreateModel(component));
                     }
                 }
                 return result;
-            }
-            foreach (var order in source.Orders)
-            {
-                if (order.AircraftId == model.AircraftId)
-                {
-                    result.Add(CreateModel(order));
-                }
-            }
-            return result;
         }
 
         public OrderViewModel GetElement(OrderBindingModel model)
@@ -63,11 +53,11 @@ namespace AbstractFactoryListImplement.Implements
             {
                 return null;
             }
-            foreach (var order in source.Orders)
+            foreach (var component in source.Orders)
             {
-                if (order.Id == model.Id || order.AircraftId == model.AircraftId)
+                if (component.Id == model.Id || component.AircraftId == model.AircraftId)
                 {
-                    return CreateModel(order);
+                    return CreateModel(component);
                 }
             }
             return null;
@@ -122,7 +112,6 @@ namespace AbstractFactoryListImplement.Implements
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.AircraftId = model.AircraftId;
-           // order.AircraftName = model.AircraftName;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
