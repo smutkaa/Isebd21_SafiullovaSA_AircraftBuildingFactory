@@ -6,6 +6,6 @@ namespace AbstractAircraftFactoryLogic.HelperModels
     { 
         public string PopHost { get; set; }
         public int PopPort { get; set; }
-        public IMessageInfoLogic Logic { get; set; }
+        public IMessageInfoStorage Storage { get; set; }
     }
 }

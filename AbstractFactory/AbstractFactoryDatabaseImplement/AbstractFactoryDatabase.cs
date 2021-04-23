@@ -1,4 +1,5 @@
 ﻿using AbstractFactoryDatabaseImplement.Models;
+using AbstractShopDatabaseImplement.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace AbstractFactoryDatabaseImplement

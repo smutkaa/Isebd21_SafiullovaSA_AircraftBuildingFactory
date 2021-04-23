@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using AbstractFactoryDatabaseImplement.Models;
 
 namespace AbstractShopDatabaseImplement.Models
 {

@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace AbstractFactoryDatabaseImplement.Implements
 {
-    public class MessageInfoStorage: IMessageInfoStorages
+    public class MessageInfoStorage: IMessageInfoStorage
     {
         public List<MessageInfoViewModel> GetFullList()
         {

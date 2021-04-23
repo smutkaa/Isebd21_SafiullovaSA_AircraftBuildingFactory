@@ -8,6 +8,7 @@ using Unity.Lifetime;
 using System.Threading;
 using AbstractAircraftFactoryLogic.HelperModels;
 using AbstractAircraftFactoryLogic.BindingModels;
+using System.Configuration;
 
 namespace AbstractFactoryView
 {
@@ -33,7 +34,7 @@ namespace AbstractFactoryView
             {
                 PopHost = ConfigurationManager.AppSettings["PopHost"],
                 PopPort = Convert.ToInt32(ConfigurationManager.AppSettings["PopPort"]),
-                Storage = container.Resolve<IMessageInfoStorages>()
+                Storage = container.Resolve<IMessageInfoStorage>()
             }, 0, 100000);
 
             Application.EnableVisualStyles();
@@ -53,7 +54,7 @@ namespace AbstractFactoryView
           HierarchicalLifetimeManager());
             currentContainer.RegisterType<IImplementerStorage, ImplementerStorage>(new
          HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IMessageInfoStorages, MessageInfoStorage>(new
+            currentContainer.RegisterType<IMessageInfoStorage, MessageInfoStorage>(new
 HierarchicalLifetimeManager());
 
 

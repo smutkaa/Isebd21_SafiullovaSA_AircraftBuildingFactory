@@ -19,9 +19,9 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
         private static int smtpClientPort;
         private static string mailLogin;
         private static string mailPassword;
-        private readonly IMessageInfoStorages _messageInfoStorage;
+        private readonly IMessageInfoStorage _messageInfoStorage;
         private readonly IClientStorage _clientStorage;
-        public MailLogic(IMessageInfoStorages messageInfoStorage, IClientStorage
+        public MailLogic(IMessageInfoStorage messageInfoStorage, IClientStorage
        clientStorage)
         {
             _messageInfoStorage = messageInfoStorage;
