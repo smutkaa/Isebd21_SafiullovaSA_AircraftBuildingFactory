@@ -242,11 +242,11 @@
     <Compile Include="FormCreateOrder.Designer.cs">
       <DependentUpon>FormCreateOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormDocument.cs">
+    <Compile Include="FormAircrafts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormDocument.Designer.cs">
-      <DependentUpon>FormDocument.cs</DependentUpon>
+    <Compile Include="FormAircrafts.Designer.cs">
+      <DependentUpon>FormAircrafts.cs</DependentUpon>
     </Compile>
     <Compile Include="FormImplementer.cs">
       <SubType>Form</SubType>
@@ -299,8 +299,8 @@
     <EmbeddedResource Include="FormCreateOrder.resx">
       <DependentUpon>FormCreateOrder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormDocument.resx">
-      <DependentUpon>FormDocument.cs</DependentUpon>
+    <EmbeddedResource Include="FormAircrafts.resx">
+      <DependentUpon>FormAircrafts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormImplementer.resx">
       <DependentUpon>FormImplementer.cs</DependentUpon>

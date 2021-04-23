@@ -17,7 +17,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
             using (var context = new AbstractFactoryDatabase())
             {
                 return context.Orders.Include(rec => rec.Aircraft).Include(rec => rec.Client)
-                .Select(rec => new OrderViewModel
+                    .Include(rec => rec.Implementer).Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
                     AircraftName = context.Aircrafts.Include(x => x.Order).FirstOrDefault(x => x.Id == rec.AircraftId).AircraftName,
@@ -28,7 +28,9 @@ namespace AbstractFactoryDatabaseImplement.Implements
                     DateCreate = rec.DateCreate,
                     DateImplement = rec.DateImplement,
                     ClientId = rec.ClientId,
-                    ClientName = rec.Client.ClientName
+                    ClientName = rec.Client.ClientName,
+                    ImplementerId = rec.ImplementerId,
+                    ImplementerName = rec.ImplementerId.HasValue ? rec.Implementer.ImplementerName : string.Empty
                 })
                 .ToList();
             }
@@ -66,7 +68,6 @@ namespace AbstractFactoryDatabaseImplement.Implements
                     ClientName = rec.Client.ClientName,
                     ImplementerId = rec.ImplementerId,
                     ImplementerName = rec.ImplementerId.HasValue ? rec.Implementer.ImplementerName : string.Empty
-
                 })
                 .ToList();
             }
@@ -80,7 +81,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
             }
             using (var context = new AbstractFactoryDatabase())
             {
-                var order = context.Orders.Include(rec => rec.Aircraft).Include(rec => rec.Client)
+                var order = context.Orders.Include(rec => rec.Aircraft).Include(rec => rec.Client).Include(rec => rec.Implementer)
                 .FirstOrDefault(rec => rec.Id == model.Id);
                 return order != null ?
                 new OrderViewModel
@@ -153,7 +154,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
             order.ClientId = (int)model.ClientId;
-            order.ImplementerId = (int)model.ImplementerId;
+            order.ImplementerId = model.ImplementerId;
             return order;
         }
     }

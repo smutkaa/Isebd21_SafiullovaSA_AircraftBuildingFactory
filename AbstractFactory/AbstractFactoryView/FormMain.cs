@@ -14,12 +14,14 @@ namespace AbstractFactoryView
 		public new IUnityContainer Container { get; set; }
 		private readonly OrderLogic _orderLogic;
 		private readonly ReportLogic _report;
-		
-		public FormMain(OrderLogic orderLogic, ReportLogic report)
+		private readonly WorkModeling _workModeling;
+
+		public FormMain(OrderLogic orderLogic, ReportLogic report, WorkModeling workmodeling)
 		{
 			InitializeComponent();
 			this._orderLogic = orderLogic;
 			this._report = report;
+			_workModeling = workmodeling;
 		}
 		private void FormMain_Load(object sender, EventArgs e)
 		{
@@ -87,7 +89,7 @@ namespace AbstractFactoryView
 
         private void ИзделияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormDocument>();
+            var form = Container.Resolve<FormAircrafts>();
             form.ShowDialog();
         }
 
@@ -126,5 +128,11 @@ namespace AbstractFactoryView
 			var form = Container.Resolve<FormImplementers>();
 			form.ShowDialog();
 		}
+
+        private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			_workModeling.DoWork();
+			LoadData();
+        }
     }
 }
