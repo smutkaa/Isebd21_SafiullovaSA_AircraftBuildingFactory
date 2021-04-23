@@ -2,6 +2,7 @@
 using AbstractAircraftFactoryLogic.Enums;
 using AbstractAircraftFactoryLogic.Interfaces;
 using AbstractAircraftFactoryLogic.ViewModels;
+using AbstractAircraftFactoryLogic.HelperModels;
 using System;
 using System.Collections.Generic;
 
@@ -11,9 +12,11 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 	{
 		private readonly object locker = new object();
 		private readonly IOrderStorage _orderStorage;
-		public OrderLogic(IOrderStorage orderStorage)
+		private readonly IClientStorage _clientStorage;
+		public OrderLogic(IOrderStorage orderStorage, IClientStorage clientStorage)
 		{
 			_orderStorage = orderStorage;
+			_clientStorage = clientStorage;
 		}
 		public List<OrderViewModel> Read(OrderBindingModel model)
 		{
@@ -38,12 +41,20 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 				Status = OrderStatus.Принят,
 				ClientId = model.ClientId
 			});
+			MailLogic.MailSendAsync(new MailSendInfo
+			{
+				MailAddress = _clientStorage.GetElement(new ClientBindingModel
+				{
+					Id = model.ClientId
+				})?.Login,
+				Subject = $"Новый заказ",
+				Text = $"Заказ от {DateTime.Now} на сумму {model.Sum:N2} принят."
+			});
 		}
 		public void TakeOrderInWork(ChangeStatusBindingModel model)
 		{
 			lock (locker)
 			{
-
 				var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
 				if (order == null)
 				{
@@ -69,6 +80,16 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 					ClientId = order.ClientId,
 					ImplementerId = model.ImplementerId,
 				});
+				MailLogic.MailSendAsync(new MailSendInfo
+				{
+					MailAddress = _clientStorage.GetElement(new ClientBindingModel
+					{
+						Id = order.ClientId
+					})?.Login,
+					Subject = $"Заказ №{order.Id}",
+					Text = $"Заказ №{order.Id} передан в работу."
+				});
+
 			}
 		}
 		public void FinishOrder(ChangeStatusBindingModel model)
@@ -93,6 +114,7 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 				Status = OrderStatus.Готов,
 				ClientId = order.ClientId
 			});
+			// Отправить письмо
 		}
 		public void PayOrder(ChangeStatusBindingModel model)
 		{
@@ -116,6 +138,7 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
                 Status = OrderStatus.Оплачен,
 				ClientId = order.ClientId
 			});
-        }
+			// Отправить письмо
+		}
 	}
 }
