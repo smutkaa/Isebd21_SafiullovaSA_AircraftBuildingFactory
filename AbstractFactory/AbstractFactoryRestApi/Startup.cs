@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using AbstractAircraftFactoryLogic.BusinessLogics;
 using AbstractAircraftFactoryLogic.Interfaces;
 using AbstractFactoryDatabaseImplement.Implements;
+using AbstractAircraftFactoryLogic.HelperModels;
 
 namespace AbstractFactoryRestApi
 {
@@ -31,9 +32,18 @@ namespace AbstractFactoryRestApi
 			services.AddTransient<IClientStorage, ClientStorage>();
 			services.AddTransient<IOrderStorage, OrderStorage>();
 			services.AddTransient<IAircraftStorage, AircraftStorage>();
+			services.AddTransient<IMessageInfoStorage, MessageInfoStorage>();
 			services.AddTransient<OrderLogic>();
 			services.AddTransient<ClientLogic>();
 			services.AddTransient<AircraftLogic>();
+			services.AddTransient<MailLogic>();
+			MailLogic.MailConfig(new MailConfig
+			{
+				SmtpClientHost = "smtp.gmail.com",
+				SmtpClientPort = 587,
+				MailLogin = "forlabtocheck@gmail.com",
+				MailPassword = "check123."
+			});
 			services.AddControllers().AddNewtonsoftJson();
 		}
 

@@ -32,7 +32,6 @@ namespace AbstractFactoryRestApi
         [HttpGet]
         public List<MessageInfoViewModel> GetMessages(int clientId) => _mailLogic.Read(new MessageInfoBindingModel { ClientId = clientId });
 
-
         [HttpPost]
         public void Register(ClientBindingModel model) => _logic.CreateOrUpdate(model);
 

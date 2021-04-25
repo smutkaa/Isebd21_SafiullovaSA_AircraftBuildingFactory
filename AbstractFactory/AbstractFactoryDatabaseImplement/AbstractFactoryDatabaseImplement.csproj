@@ -180,6 +180,10 @@
     <Compile Include="Migrations\20210411114009_createImplemetor.designer.cs">
       <DependentUpon>20210411114009_createImplemetor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210425131016_AddMail.cs" />
+    <Compile Include="Migrations\20210425131016_AddMail.designer.cs">
+      <DependentUpon>20210425131016_AddMail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AbstractFactoryDatabaseModelSnapshot.cs" />
     <Compile Include="Models\Aircraft.cs" />
     <Compile Include="Models\AircraftComponent.cs" />

@@ -23,6 +23,17 @@ namespace AbstractFactoryAPIClient.Controllers
             View(APIClient.GetRequest<List<OrderViewModel>>($"api/main/getorders?clientId={Program.Client.Id}"));
         }
         [HttpGet]
+
+        public IActionResult ReturnMail()
+        {
+            if (Program.Client == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            return
+            View(APIClient.GetRequest<List<MessageInfoViewModel>>($"api/main/getmessage?clientId={Program.Client.Id}"));
+        }
+        [HttpGet]
         public IActionResult Privacy()
         {
             if (Program.Client == null)
@@ -108,8 +119,7 @@ namespace AbstractFactoryAPIClient.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Aircraft =
-            APIClient.GetRequest<List<AircraftViewModel>>("api/main/getaircraftlist");
+            ViewBag.Aircraft = APIClient.GetRequest<List<AircraftViewModel>>("api/main/getaircraftlist");
             return View();
         }
         [HttpPost]
@@ -135,5 +145,6 @@ namespace AbstractFactoryAPIClient.Controllers
             APIClient.GetRequest<AircraftViewModel>($"api/main/getaircraft?aircraftId={aircraft}");
             return count * airc.Price;
         }
+
     }
 }
