@@ -18,18 +18,23 @@ namespace AbstractFactoryFileImplement
 		private readonly string OrderFileName = "Order.xml";
 		private readonly string AircraftFileName = "Aircraft.xml";
 		private readonly string ClientFileName = "Client.xml";
+		private readonly string ImplementerFileName = "Implementer.xml";
+		private readonly string MessageInfoFileName = "MessageInfo.xml";
 
 		public List<Component> Components { get; set; }
 		public List<Order> Orders { get; set; }
 		public List<Aircraft> Aircrafts { get; set; }
 		public List<Client> Clients { get; set; }
-
+		public List<Implementer> Implementers { get; set; }
+		public List<MessageInfo> MessageInfoes { get; set; }
 		private FileDataListSingleton()
 		{
 			Components = LoadComponents();
 			Orders = LoadOrders();
 			Aircrafts = LoadAircrafts();
 			Clients = LoadClients();
+			Implementers = LoadImplementer();
+			MessageInfoes = LoadMessageInfo();
 		}
 		public static FileDataListSingleton GetInstance()
 		{
@@ -46,6 +51,8 @@ namespace AbstractFactoryFileImplement
 			SaveOrders();
 			SaveAircrafts();
 			SaveClients();
+			SaveImplementer();
+			SaveMessageInfo();
 		}
 
 		private List<Component> LoadComponents()
@@ -154,6 +161,49 @@ namespace AbstractFactoryFileImplement
 			}
 			return list;
 		}
+		private List<Implementer> LoadImplementer()
+		{
+			var list = new List<Implementer>();
+			if (File.Exists(ImplementerFileName))
+			{
+				XDocument xDocument = XDocument.Load(ImplementerFileName);
+				var xElements = xDocument.Root.Elements("Implementer").ToList();
+				foreach (var elem in xElements)
+				{
+					list.Add(new Implementer
+					{
+						Id = Convert.ToInt32(elem.Attribute("Id").Value),
+						ImplementerName = elem.Element("ImplementerName").Value,
+						WorkingTime = Convert.ToInt32(elem.Element("WorkingTime").Value),
+						PauseTime = Convert.ToInt32(elem.Element("PauseTime").Value)
+					});
+				}
+			}
+			return list;
+		}
+		private List<MessageInfo> LoadMessageInfo()
+		{
+			var list = new List<MessageInfo>();
+			if (File.Exists(MessageInfoFileName))
+			{
+				XDocument xDocument = XDocument.Load(MessageInfoFileName);
+				var xElements = xDocument.Root.Elements("MessageInfo").ToList();
+
+				foreach (var elem in xElements)
+				{
+					list.Add(new MessageInfo
+					{
+						MessageId = elem.Attribute("Id").Value,
+						ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
+						SenderName = elem.Element("ClientId").Value,
+						Subject = elem.Element("Subject").Value,
+						Body = elem.Element("Body").Value,
+						DateDelivery = Convert.ToDateTime(elem.Element("DateDelivery").Value)
+					});
+				}
+			}
+			return list;
+		}
 		private void SaveComponents()
 		{
 			if (Components != null)
@@ -229,6 +279,42 @@ namespace AbstractFactoryFileImplement
 				}
 				XDocument xDocument = new XDocument(xElement);
 				xDocument.Save(ClientFileName);
+			}
+		}
+		private void SaveImplementer()
+		{
+			if (Implementers != null)
+			{
+				var xElement = new XElement("Implementers");
+				foreach (var implementer in Implementers)
+				{
+					xElement.Add(new XElement("Implementer",
+					new XAttribute("Id", implementer.Id),
+					new XElement("ImplementerName", implementer.ImplementerName),
+					new XElement("WorkingTime", implementer.WorkingTime),
+					new XElement("PauseTime", implementer.PauseTime)));
+				}
+				XDocument xDocument = new XDocument(xElement);
+				xDocument.Save(ImplementerFileName);
+			}
+		}
+		private void SaveMessageInfo()
+		{
+			if (MessageInfoes != null)
+			{
+				var xElement = new XElement("MessageInfo");
+				foreach (var messageInfo in MessageInfoes)
+				{
+					xElement.Add(new XElement("MessageInfo",
+					new XAttribute("MessageId", messageInfo.MessageId),
+					new XElement("Subject", messageInfo.Subject),
+					new XElement("SenderName", messageInfo.SenderName),
+					new XElement("Body", messageInfo.Body),
+					new XElement("ClientId", messageInfo.ClientId),
+					new XElement("DateDelivery", messageInfo.DateDelivery)));
+				}
+				XDocument xDocument = new XDocument(xElement);
+				xDocument.Save(MessageInfoFileName);
 			}
 		}
 	}

@@ -114,7 +114,15 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 				Status = OrderStatus.Готов,
 				ClientId = order.ClientId
 			});
-			// Отправить письмо
+			MailLogic.MailSendAsync(new MailSendInfo
+			{
+				MailAddress = _clientStorage.GetElement(new ClientBindingModel
+				{
+					Id = order.ClientId
+				})?.Login,
+				Subject = $"Заказ №{order.Id}",
+				Text = $"Заказ №{order.Id} готов."
+			});
 		}
 		public void PayOrder(ChangeStatusBindingModel model)
 		{
@@ -138,7 +146,15 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
                 Status = OrderStatus.Оплачен,
 				ClientId = order.ClientId
 			});
-			// Отправить письмо
+			MailLogic.MailSendAsync(new MailSendInfo
+			{
+				MailAddress = _clientStorage.GetElement(new ClientBindingModel
+				{
+					Id = order.ClientId
+				})?.Login,
+				Subject = $"Заказ №{order.Id}",
+				Text = $"Заказ №{order.Id} оплачен."
+			});
 		}
 	}
 }

@@ -24,14 +24,14 @@ namespace AbstractFactoryAPIClient.Controllers
         }
         [HttpGet]
 
-        public IActionResult ReturnMail()
+        public IActionResult Mail()
         {
             if (Program.Client == null)
             {
                 return Redirect("~/Home/Enter");
             }
             return
-            View(APIClient.GetRequest<List<MessageInfoViewModel>>($"api/main/getmessage?clientId={Program.Client.Id}"));
+            View(APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/getmessages?clientId={Program.Client.Id}"));
         }
         [HttpGet]
         public IActionResult Privacy()
