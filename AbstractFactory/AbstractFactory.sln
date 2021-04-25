@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractAircraftFactoryLogi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFactoryListImplement", "AbstractFactoryListImplement\AbstractFactoryListImplement.csproj", "{BABCD955-0948-458E-ACF7-86A504904C95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFactoryFileImplement", "AbstractFactoryFileImplement\AbstractFactoryFileImplement.csproj", "{B24B37B3-FA2B-4F03-A8A0-43A983E860FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractFactoryFileImplement", "AbstractFactoryFileImplement\AbstractFactoryFileImplement.csproj", "{B24B37B3-FA2B-4F03-A8A0-43A983E860FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFactoryDatabaseImplement", "AbstractFactoryDatabaseImplement\AbstractFactoryDatabaseImplement.csproj", "{C6450972-15A7-41C4-A1D6-81E91273C24A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B24B37B3-FA2B-4F03-A8A0-43A983E860FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B24B37B3-FA2B-4F03-A8A0-43A983E860FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B24B37B3-FA2B-4F03-A8A0-43A983E860FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6450972-15A7-41C4-A1D6-81E91273C24A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6450972-15A7-41C4-A1D6-81E91273C24A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6450972-15A7-41C4-A1D6-81E91273C24A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6450972-15A7-41C4-A1D6-81E91273C24A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

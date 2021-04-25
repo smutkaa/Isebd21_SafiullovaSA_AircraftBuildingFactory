@@ -46,13 +46,13 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 			{
 				throw new Exception("Не найден заказ");
 			}
-			if (!_storageStorage.Extract(order.Count, order.AircraftId))
+			if (order.Status != OrderStatus.Принят)
 			{
-				throw new Exception("Компонентов не достаточно");
+				throw new Exception("Заказ не в статусе \"Принят\"");
 			}
-			if (order == null)
+			if (!_storageStorage.Unrestocking(order.AircraftId, order.Count))
 			{
-				throw new Exception("Не найден заказ");
+				throw new Exception("Не хватает компонентов");
 			}
 			_orderStorage.Update(new OrderBindingModel
 			{
@@ -89,7 +89,6 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 		}
 		public void PayOrder(ChangeStatusBindingModel model)
 		{
-            // продумать логику
             var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
             if (order == null)
             {

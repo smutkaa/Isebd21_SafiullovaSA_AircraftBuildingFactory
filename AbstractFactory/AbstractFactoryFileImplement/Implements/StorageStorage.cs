@@ -41,15 +41,13 @@ namespace AbstractFactoryFileImplement.Implements
         }
         public void Insert(StorageBindingModel model)
         {
-            Storage tempStorage = new Storage { Id = 1, StorageComponents = new Dictionary<int, int>() };
-            foreach (var storage in source.Storages)
+            int maxId = source.Storages.Count > 0 ? source.Components.Max(rec => rec.Id) : 0;
+            var element = new Storage
             {
-                if (storage.Id >= tempStorage.Id)
-                {
-                    tempStorage.Id = storage.Id + 1;
-                }
-            }
-            source.Storages.Add(CreateModel(model, tempStorage));
+                Id = maxId + 1,
+                StorageComponents = new Dictionary<int, int>()
+            };
+            source.Storages.Add(CreateModel(model, element));
         }
         public void Update(StorageBindingModel model)
         {
@@ -117,34 +115,7 @@ namespace AbstractFactoryFileImplement.Implements
                     recPC.Key)?.ComponentName, recPC.Value))
             };
         }
-        public void Availability(StorageBindingModel houseBindingModel, int StorageId, int ComponentId, int Count, string ComponentName)
-        {
-            StorageViewModel view = GetElement(new StorageBindingModel
-            {
-                Id = StorageId
-            });
-
-            if (view != null)
-            {
-                houseBindingModel.StorageComponents = view.StorageComponents;
-                houseBindingModel.DateCreate = view.DateCreate;
-                houseBindingModel.Id = view.Id;
-                houseBindingModel.ResponsiblePerson = view.ResponsiblePerson;
-                houseBindingModel.StorageName = view.StorageName;
-            }
-
-            if (houseBindingModel.StorageComponents.ContainsKey(ComponentId))
-            {
-                int count = houseBindingModel.StorageComponents[ComponentId].Item2;
-                houseBindingModel.StorageComponents[ComponentId] = (ComponentName, count + Count);
-            }
-            else
-            {
-                houseBindingModel.StorageComponents.Add(ComponentId, (ComponentName, Count));
-            }
-            Update(houseBindingModel);
-        }
-        public bool Extract(int AircraftCount, int AircraftId)
+        public bool Unrestocking(int AircraftCount, int AircraftId)
         {
             var list = GetFullList();
 

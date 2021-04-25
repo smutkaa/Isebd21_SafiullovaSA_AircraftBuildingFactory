@@ -97,7 +97,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(568, 382);
+            this.ClientSize = new System.Drawing.Size(563, 346);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.buttoRef);
             this.Controls.Add(this.buttonDelete);

@@ -23,10 +23,7 @@ namespace AbstractFactoryView
             this.logic = logic;
         }
 
-        private void FormStorages_Load(object sender, EventArgs e)
-        {
-            LoadData();
-        }
+
         private void LoadData()
         {
             try
@@ -86,6 +83,11 @@ namespace AbstractFactoryView
         }
 
         private void ButtoRef_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void FormStorages_Load(object sender, EventArgs e)
         {
             LoadData();
         }
