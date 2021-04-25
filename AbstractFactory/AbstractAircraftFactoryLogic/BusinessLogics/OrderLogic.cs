@@ -67,7 +67,7 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 					DateImplement = DateTime.Now,
 					Status = OrderStatus.Выполняется,
 					ClientId = order.ClientId,
-					ImplementerId = model.ImplementerId,
+					ImplementerId = model.ImplementerId
 				});
 			}
 		}
@@ -91,7 +91,8 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 				DateCreate = order.DateCreate,
 				DateImplement = order.DateImplement,
 				Status = OrderStatus.Готов,
-				ClientId = order.ClientId
+				ClientId = order.ClientId,
+				ImplementerId = model.ImplementerId
 			});
 		}
 		public void PayOrder(ChangeStatusBindingModel model)
