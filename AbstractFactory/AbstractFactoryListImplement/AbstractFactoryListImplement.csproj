@@ -64,12 +64,14 @@
   <ItemGroup>
     <Compile Include="Implements\AircraftStorage.cs" />
     <Compile Include="Implements\ClientStorage.cs" />
+    <Compile Include="Implements\ImplementerStorage.cs" />
     <Compile Include="Implements\OrderStorage.cs" />
     <Compile Include="Models\Aircraft.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Component.cs" />
     <Compile Include="Implements\ComponentStorage.cs" />
     <Compile Include="DataListSingleton.cs" />
+    <Compile Include="Models\Implementer.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
