@@ -89,7 +89,6 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 		}
 		public void PayOrder(ChangeStatusBindingModel model)
 		{
-            // продумать логику
             var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
             if (order == null)
             {

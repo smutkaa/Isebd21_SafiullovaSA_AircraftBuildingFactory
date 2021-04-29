@@ -8,11 +8,6 @@ namespace AbstractFactoryView
 {
     public partial class FormStorages : Form
     {
-        public FormStorages()
-        {
-            InitializeComponent();
-        }
-
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
@@ -23,10 +18,7 @@ namespace AbstractFactoryView
             this.logic = logic;
         }
 
-        private void FormStorages_Load(object sender, EventArgs e)
-        {
-            LoadData();
-        }
+
         private void LoadData()
         {
             try
@@ -86,6 +78,11 @@ namespace AbstractFactoryView
         }
 
         private void ButtoRef_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void FormStorages_Load(object sender, EventArgs e)
         {
             LoadData();
         }

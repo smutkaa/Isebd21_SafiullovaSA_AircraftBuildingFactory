@@ -41,15 +41,13 @@ namespace AbstractFactoryFileImplement.Implements
         }
         public void Insert(StorageBindingModel model)
         {
-            Storage tempStorage = new Storage { Id = 1, StorageComponents = new Dictionary<int, int>() };
-            foreach (var storage in source.Storages)
-            {
-                if (storage.Id >= tempStorage.Id)
-                {
-                    tempStorage.Id = storage.Id + 1;
-                }
-            }
-            source.Storages.Add(CreateModel(model, tempStorage));
+            int maxId = source.Storages.Count > 0 ? source.Components.Max(rec => rec.Id) : 0;
+            var element = new Storage
+            { 
+                Id = maxId + 1,
+                StorageComponents = new Dictionary<int, int>() 
+            };
+            source.Storages.Add(CreateModel(model, element));
         }
         public void Update(StorageBindingModel model)
         {
@@ -117,7 +115,7 @@ namespace AbstractFactoryFileImplement.Implements
                     recPC.Key)?.ComponentName, recPC.Value))
             };
         }
-        public void Availability(StorageBindingModel houseBindingModel, int StorageId, int ComponentId, int Count, string ComponentName)
+        public void Existence(StorageBindingModel houseBindingModel, int StorageId, int ComponentId, int Count, string ComponentName)
         {
             StorageViewModel view = GetElement(new StorageBindingModel
             {

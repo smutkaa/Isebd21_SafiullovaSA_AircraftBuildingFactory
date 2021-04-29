@@ -54,5 +54,48 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
             }
             _storageStorage.Delete(model);
         }
+        public void Filling(StorageBindingModel model, int StorageId, int ComponentId, int Count)
+        {
+            StorageViewModel storage = _storageStorage.GetElement(new StorageBindingModel
+            {
+                Id = StorageId
+            });
+
+            ComponentViewModel component = _componentStorage.GetElement(new ComponentBindingModel
+            {
+                Id = ComponentId
+            });
+
+            if (storage == null)
+            {
+                throw new Exception("Склад не найден");
+            }
+
+            if (component == null)
+            {
+                throw new Exception("Компонент не найден");
+            }
+
+            Dictionary<int, (string, int)> storageComponents = storage.StorageComponents;
+
+            if (storageComponents.ContainsKey(ComponentId))
+            {
+                int count = storageComponents[ComponentId].Item2;
+                storageComponents[ComponentId] = (component.ComponentName, count + Count);
+            }
+            else
+            {
+                storageComponents.Add(ComponentId, (component.ComponentName, Count));
+            }
+
+            _storageStorage.Update(new StorageBindingModel
+            {
+                Id = storage.Id,
+                StorageName = storage.StorageName,
+                ResponsiblePerson = storage.ResponsiblePerson,
+                DateCreate = storage.DateCreate,
+                StorageComponents = storageComponents
+            });
+        }
     }
 }

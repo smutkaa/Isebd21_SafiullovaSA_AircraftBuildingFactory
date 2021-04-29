@@ -5,10 +5,10 @@ using AbstractAircraftFactoryLogic.ViewModels;
 using AbstractFactoryListImplement.Models;
 using System.Collections.Generic;
 using System.Linq;
-/*
+
 namespace AbstractFactoryListImplement.Implements
 {
-    public class StorageStorage : IStorageStorage
+    public class StorageStorage //: IStorageStorage
     {
         private readonly DataListSingleton source;
 
@@ -152,7 +152,7 @@ namespace AbstractFactoryListImplement.Implements
                 StorageComponents = storageComponents
             };
         }
-        public void Restocking(StorageBindingModel model, int StorageId, int ComponentId, int Count, string ComponentName)
+        public void Filling(StorageBindingModel model, int StorageId, int ComponentId, int Count, string ComponentName)
         {
             StorageViewModel view = GetElement(new StorageBindingModel
             {
@@ -178,9 +178,6 @@ namespace AbstractFactoryListImplement.Implements
                 model.StorageComponents.Add(ComponentId, (ComponentName, Count));
             }
             Update(model);
-        }
-
-   
+        }    
     }
 }
-    */

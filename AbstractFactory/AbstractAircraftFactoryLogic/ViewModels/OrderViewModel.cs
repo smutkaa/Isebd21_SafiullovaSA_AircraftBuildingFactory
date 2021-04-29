@@ -19,6 +19,7 @@ namespace AbstractAircraftFactoryLogic.ViewModels
         [DisplayName("Дата создания")]
         public DateTime DateCreate { get; set; }
         [DisplayName("Дата выполнения")]
-        public DateTime? DateImplement { get; set; }
+        public DateTime? DateImplement { get; set; }
+
     }
 }
