@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace AbstractFactoryListImplement.Implements
 {
-    public class StorageStorage //: IStorageStorage
+    public class StorageStorage : IStorageStorage
     {
         private readonly DataListSingleton source;
 

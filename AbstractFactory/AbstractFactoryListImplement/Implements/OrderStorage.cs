@@ -111,7 +111,6 @@ namespace AbstractFactoryListImplement.Implements
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.AircraftId = model.AircraftId;
-           // order.AircraftName = model.AircraftName;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -122,16 +121,24 @@ namespace AbstractFactoryListImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
+            string aircraftName = null;
+            foreach (var aircraft in source.Aircraft)
+            {
+                if (aircraft.Id == order.AircraftId)
+                {
+                    aircraftName = aircraft.AircraftName;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
+                AircraftId = order.AircraftId,
+                AircraftName = aircraftName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement,
-                AircraftId = order.AircraftId,
-                AircraftName = source.Aircraft.FirstOrDefault(a => a.Id == order.AircraftId).AircraftName
+                DateImplement = order.DateImplement
             };
         }
     } 

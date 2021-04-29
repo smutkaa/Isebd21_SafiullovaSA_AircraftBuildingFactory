@@ -17,6 +17,7 @@ namespace AbstractFactoryListImplement
             Components = new List<Component>();
             Orders = new List<Order>();
             Aircraft = new List<Aircraft>();
+            Storages = new List<Storage>();
         }
         public static DataListSingleton GetInstance()
         {
