@@ -42,8 +42,9 @@
             this.компонентыПоИзделиямToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокЗаказовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.запускРаботToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.письмаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.создатьБекапToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -84,7 +85,8 @@
             this.справочникиToolStripMenuItem,
             this.отчетыToolStripMenuItem,
             this.запускРаботToolStripMenuItem,
-            this.письмаToolStripMenuItem});
+            this.письмаToolStripMenuItem,
+            this.создатьБекапToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(723, 24);
@@ -168,6 +170,13 @@
             this.запускРаботToolStripMenuItem.Text = "Запуск работ";
             this.запускРаботToolStripMenuItem.Click += new System.EventHandler(this.запускРаботToolStripMenuItem_Click);
             // 
+            // письмаToolStripMenuItem
+            // 
+            this.письмаToolStripMenuItem.Name = "письмаToolStripMenuItem";
+            this.письмаToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.письмаToolStripMenuItem.Text = "Письма";
+            this.письмаToolStripMenuItem.Click += new System.EventHandler(this.письмаToolStripMenuItem_Click);
+            // 
             // dataGridView
             // 
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
@@ -177,12 +186,12 @@
             this.dataGridView.Size = new System.Drawing.Size(553, 324);
             this.dataGridView.TabIndex = 6;
             // 
-            // письмаToolStripMenuItem
+            // создатьБекапToolStripMenuItem
             // 
-            this.письмаToolStripMenuItem.Name = "письмаToolStripMenuItem";
-            this.письмаToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.письмаToolStripMenuItem.Text = "Письма";
-            this.письмаToolStripMenuItem.Click += new System.EventHandler(this.письмаToolStripMenuItem_Click);
+            this.создатьБекапToolStripMenuItem.Name = "создатьБекапToolStripMenuItem";
+            this.создатьБекапToolStripMenuItem.Size = new System.Drawing.Size(97, 20);
+            this.создатьБекапToolStripMenuItem.Text = "Создать бекап";
+            this.создатьБекапToolStripMenuItem.Click += new System.EventHandler(this.создатьБекапToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -224,5 +233,6 @@
         private System.Windows.Forms.ToolStripMenuItem исполнителиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem запускРаботToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem письмаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem создатьБекапToolStripMenuItem;
     }
 }
