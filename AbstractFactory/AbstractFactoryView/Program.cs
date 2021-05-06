@@ -56,13 +56,12 @@ namespace AbstractFactoryView
          HierarchicalLifetimeManager());
             currentContainer.RegisterType<IMessageInfoStorage, MessageInfoStorage>(new
 HierarchicalLifetimeManager());
+            currentContainer.RegisterType<BackUpAbstractLogic, BackUpLogic>(new HierarchicalLifetimeManager());
 
 
-            currentContainer.RegisterType<ComponentLogic>(new
-           HierarchicalLifetimeManager());
+            currentContainer.RegisterType<ComponentLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<OrderLogic>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<AircraftLogic>(new
-           HierarchicalLifetimeManager());
+            currentContainer.RegisterType<AircraftLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ComponentLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<OrderLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<AircraftLogic>(new HierarchicalLifetimeManager());

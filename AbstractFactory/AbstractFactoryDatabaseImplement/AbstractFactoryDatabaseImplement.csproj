@@ -163,6 +163,7 @@
   <ItemGroup>
     <Compile Include="AbstractFactoryDatabase.cs" />
     <Compile Include="Implements\AircraftStorage.cs" />
+    <Compile Include="Implements\BackUpLogic.cs" />
     <Compile Include="Implements\ClientStorage.cs" />
     <Compile Include="Implements\ComponentStorage.cs" />
     <Compile Include="Implements\ImplementerStorage.cs" />
