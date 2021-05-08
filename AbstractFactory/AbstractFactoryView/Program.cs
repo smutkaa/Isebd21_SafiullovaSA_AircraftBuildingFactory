@@ -38,6 +38,7 @@ namespace AbstractFactoryView
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<IStorageStorage, StorageStorage>(new
          HierarchicalLifetimeManager());
+            currentContainer.RegisterType<ReportLogic>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
     }
