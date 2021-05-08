@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AbstractAircraftFactoryLogic.ViewModels
 {
-    class ReportStorageComponentsViewModel
+    public class ReportStorageComponentsViewModel
     {
         public string Name { get; set; }
 

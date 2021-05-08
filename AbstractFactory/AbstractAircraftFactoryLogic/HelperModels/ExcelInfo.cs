@@ -9,5 +9,6 @@ namespace AbstractAircraftFactoryLogic.HelperModels
 		public string FileName { get; set; }
 		public string Title { get; set; }
 		public List<ReportAircraftComponentViewModel> AircraftComponents { get; set; }
+		public List<ReportStorageComponentsViewModel> StorageComponents { get; set; }
 	}
 }

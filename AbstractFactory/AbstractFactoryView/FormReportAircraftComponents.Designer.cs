@@ -86,6 +86,7 @@ namespace AbstractFactoryView
             this.Controls.Add(this.buttonSaveToExcel);
             this.Name = "FormReportAircraftComponents";
             this.Text = "Отчет по компонентам";
+            this.Load += new System.EventHandler(this.FormReportAircraftComponents_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

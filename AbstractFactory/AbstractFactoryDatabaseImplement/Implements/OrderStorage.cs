@@ -38,27 +38,27 @@ namespace AbstractFactoryDatabaseImplement.Implements
             {
                 return null;
             }
+
             using (var context = new AbstractFactoryDatabase())
             {
                 return context.Orders
-                .Where(rec => rec.Id.Equals(model.Id))
-                .Select(rec => new OrderViewModel
-                {
-                    Id = rec.Id,
-                    AircraftName = context.Aircrafts
-                     .Include(x => x.Order)
-                     .FirstOrDefault(r => r.Id == rec.AircraftId).AircraftName,
-                    AircraftId = rec.AircraftId,
-                    Count = rec.Count,
-                    Sum = rec.Sum,
-                    Status = rec.Status,
-                    DateCreate = rec.DateCreate,
-                    DateImplement = rec.DateImplement
-                })
-                .ToList();
+                   .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate == model.DateCreate) ||
+                   (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date))
+                    .Select(rec => new OrderViewModel
+                    {
+                        Id = rec.Id,
+                        AircraftName = context.Aircrafts
+                        .Include(x => x.Order)
+                        .FirstOrDefault(x => x.Id == rec.AircraftId).AircraftName,
+                        AircraftId = rec.AircraftId,
+                        Count = rec.Count,
+                        Sum = rec.Sum,
+                        Status = rec.Status,
+                        DateCreate = rec.DateCreate,
+                        DateImplement = rec.DateImplement
+                    }).ToList();
             }
         }
-
         public OrderViewModel GetElement(OrderBindingModel model)
         {
             if (model == null)
@@ -73,9 +73,7 @@ namespace AbstractFactoryDatabaseImplement.Implements
                 new OrderViewModel
                 {
                     Id = order.Id,
-                    AircraftName = context.Aircrafts
-                     .Include(x => x.Order)
-                     .FirstOrDefault(r => r.Id == order.AircraftId).AircraftName,
+                    AircraftName = context.Aircrafts.FirstOrDefault(r => r.Id == order.AircraftId).AircraftName,
                     AircraftId = order.AircraftId,
                     Count = order.Count,
                     Sum = order.Sum,

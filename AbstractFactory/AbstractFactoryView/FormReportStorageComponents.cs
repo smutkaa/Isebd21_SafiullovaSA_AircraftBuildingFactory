@@ -28,7 +28,7 @@ namespace AbstractFactoryView
                 {
                     try
                     {
-                        logic.SaveAircraftComponentToExcelFile(new ReportBindingModel
+                        logic.SaveStorageComponentToExcelFile(new ReportBindingModel
                         {
                             FileName = dialog.FileName
                         });

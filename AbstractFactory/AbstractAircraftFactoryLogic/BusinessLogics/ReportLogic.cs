@@ -14,12 +14,14 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 		private readonly IComponentStorage _componentStorage;
 		private readonly IAircraftStorage _aircraftStorage;
 		private readonly IOrderStorage _orderStorage;
+		private readonly IStorageStorage _storageStorage;
 
-		public ReportLogic(IAircraftStorage aircraftStorage, IComponentStorage componentStorage, IOrderStorage orderStorage)
+		public ReportLogic(IAircraftStorage aircraftStorage, IComponentStorage componentStorage, IOrderStorage orderStorage, IStorageStorage storageStorage)
 		{
 			_aircraftStorage = aircraftStorage;
 			_componentStorage = componentStorage;
 			_orderStorage = orderStorage;
+			_storageStorage = storageStorage;
 		}
 		public List<ReportAircraftComponentViewModel> GetComponentsAircraft()
 		{
@@ -41,6 +43,27 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 				list.Add(record);
 			}
 			return list;
+		}
+		public List<ReportStorageComponentsViewModel> GetComponentsStorage()
+		{
+			var storages = _storageStorage.GetFullList();
+			var listStorage = new List<ReportStorageComponentsViewModel>();
+			foreach (var storage in storages)
+			{
+				var record = new ReportStorageComponentsViewModel
+				{
+					Name = storage.StorageName,
+					Components = new List<Tuple<string, int>>(),
+					Count = 0
+				};
+				foreach (var component in storage.StorageComponents)
+				{
+					record.Components.Add(new Tuple<string, int>(component.Value.Item1, component.Value.Item2));
+					record.Count += component.Value.Item2;
+				}
+				listStorage.Add(record);
+			}
+			return listStorage;
 		}
 		public List<ReportOrdersViewModel> GetOrders(ReportBindingModel model)
 		{
@@ -75,6 +98,16 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 				FileName = model.FileName,
 				Title = "Список изделий",
 				AircraftComponents = GetComponentsAircraft()
+			});
+		}
+		public void SaveStorageComponentToExcelFile(ReportBindingModel model)
+		{
+			SaveToExcel.CreateDoc(new ExcelInfo
+			{
+				FileName = model.FileName,
+				Title = "Список складов",
+				
+				StorageComponents = GetComponentsStorage()
 			});
 		}
 		public void SaveOrdersToPdfFile(ReportBindingModel model)
