@@ -11,15 +11,13 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 {
 	public class ReportLogic
 	{
-		private readonly IComponentStorage _componentStorage;
 		private readonly IAircraftStorage _aircraftStorage;
 		private readonly IOrderStorage _orderStorage;
 		private readonly IStorageStorage _storageStorage;
 
-		public ReportLogic(IAircraftStorage aircraftStorage, IComponentStorage componentStorage, IOrderStorage orderStorage, IStorageStorage storageStorage)
+		public ReportLogic(IAircraftStorage aircraftStorage, IOrderStorage orderStorage, IStorageStorage storageStorage)
 		{
 			_aircraftStorage = aircraftStorage;
-			_componentStorage = componentStorage;
 			_orderStorage = orderStorage;
 			_storageStorage = storageStorage;
 		}
@@ -82,6 +80,16 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 			})
 			.ToList();
 		}
+		public List<ReportOrdersViewModel> GetOrdersGroupByDate()
+		{
+			return _orderStorage.GetFullList().GroupBy(x => x.DateCreate.Date)
+			.Select(x => new ReportOrdersViewModel
+			{
+				DateCreate = x.Key,
+				Count = x.Count(),
+				Sum = x.Sum(rec => rec.Sum)
+			}).ToList();
+		}
 		public void SaveAircraftsToWordFile(ReportBindingModel model)
 		{
 			SaveToWord.CreateDoc(new WordInfo
@@ -89,6 +97,15 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 				FileName = model.FileName,
 				Title = "Список изделий",
 				Aircrafts = _aircraftStorage.GetFullList()
+			});
+		}
+		public void SaveStorageToWordFile(ReportBindingModel model)
+		{
+			SaveToWord.CreateDocStorage(new WordInfoStorage
+			{
+				FileName = model.FileName,
+				Title = "Список складов",
+				Storages = _storageStorage.GetFullList()
 			});
 		}
 		public void SaveAircraftComponentToExcelFile(ReportBindingModel model)
@@ -106,7 +123,6 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 			{
 				FileName = model.FileName,
 				Title = "Список складов",
-				
 				StorageComponents = GetComponentsStorage()
 			});
 		}
@@ -119,6 +135,15 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 				DateFrom = model.DateFrom.Value,
 				DateTo = model.DateTo.Value,
 				Orders = GetOrders(model)
+			});
+		}
+		public void SaveAllOrdersToPdfFile(ReportBindingModel model)
+		{
+			SaveToPdf.CreateDocAllOrders(new PdfInfo
+			{
+				FileName = model.FileName,
+				Title = "Список заказов",
+				Orders = GetOrdersGroupByDate()
 			});
 		}
 	}

@@ -19,12 +19,6 @@ namespace AbstractFactoryView
             this.logic = logic;
         }
 
-        private void FormClientOrders_Load(object sender, EventArgs e)
-        {
-
-            this.reportViewer.RefreshReport();
-        }
-
         private void buttonInPDF_Click(object sender, EventArgs e)
         {
             if (dateTimePickerFrom.Value.Date >= dateTimePickerTo.Value.Date)
@@ -73,8 +67,7 @@ namespace AbstractFactoryView
                     DateFrom = dateTimePickerFrom.Value,
                     DateTo = dateTimePickerTo.Value
                 });
-                ReportDataSource source = new ReportDataSource("DataSetOrders",
-                dataSource);
+                ReportDataSource source = new ReportDataSource("DataSetOrders",   dataSource);
                 reportViewer.LocalReport.DataSources.Add(source);
                 reportViewer.RefreshReport();
             }
@@ -83,5 +76,10 @@ namespace AbstractFactoryView
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-    }
+
+        private void FormClientOrders_Load(object sender, EventArgs e)
+        {
+
+        }
+    }    
 }

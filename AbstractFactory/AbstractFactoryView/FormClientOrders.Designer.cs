@@ -30,17 +30,20 @@ namespace AbstractFactoryView
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            this.ReportOrdersViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
             this.reportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.ReportOrdersViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.labelFrom = new System.Windows.Forms.Label();
             this.labelTo = new System.Windows.Forms.Label();
             this.buttonCreate = new System.Windows.Forms.Button();
             this.buttonInPDF = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ReportOrdersViewModelBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // ReportOrdersViewModelBindingSource
+            // 
+            this.ReportOrdersViewModelBindingSource.DataSource = typeof(AbstractAircraftFactoryLogic.ViewModels.ReportOrdersViewModel);
             // 
             // dateTimePickerFrom
             // 
@@ -58,19 +61,12 @@ namespace AbstractFactoryView
             // 
             // reportViewer
             // 
-            reportDataSource1.Name = "DataSetOrders";
-            reportDataSource1.Value = this.ReportOrdersViewModelBindingSource;
-            this.reportViewer.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer.LocalReport.ReportEmbeddedResource = "AbstractFactoryView.Report.rdlc";
             this.reportViewer.Location = new System.Drawing.Point(12, 38);
             this.reportViewer.Name = "reportViewer";
             this.reportViewer.ServerReport.BearerToken = null;
             this.reportViewer.Size = new System.Drawing.Size(776, 381);
             this.reportViewer.TabIndex = 2;
-            // 
-            // ReportOrdersViewModelBindingSource
-            // 
-            this.ReportOrdersViewModelBindingSource.DataSource = typeof(AbstractAircraftFactoryLogic.ViewModels.ReportOrdersViewModel);
             // 
             // labelFrom
             // 
@@ -123,7 +119,7 @@ namespace AbstractFactoryView
             this.Controls.Add(this.dateTimePickerTo);
             this.Controls.Add(this.dateTimePickerFrom);
             this.Name = "FormClientOrders";
-            this.Text = "FormClientOrders";
+            this.Text = "Заказы за период";
             this.Load += new System.EventHandler(this.FormClientOrders_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ReportOrdersViewModelBindingSource)).EndInit();
             this.ResumeLayout(false);

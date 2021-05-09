@@ -200,6 +200,12 @@
     <Compile Include="FormAircraftComponent.Designer.cs">
       <DependentUpon>FormAircraftComponent.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAllOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAllOrders.Designer.cs">
+      <DependentUpon>FormAllOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormClientOrders.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -275,6 +281,9 @@
     <EmbeddedResource Include="FormAircraftComponent.resx">
       <DependentUpon>FormAircraftComponent.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormAllOrders.resx">
+      <DependentUpon>FormAllOrders.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormClientOrders.resx">
       <DependentUpon>FormClientOrders.cs</DependentUpon>
     </EmbeddedResource>
@@ -318,7 +327,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Report.rdlc" />
+    <EmbeddedResource Include="ReportAllOrders.rdlc" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\AbstractAircraftFactoryLogic.ViewModels.ReportAllOrdersViewModel.datasource" />
     <None Include="Properties\DataSources\AbstractAircraftFactoryLogic.ViewModels.ReportOrdersViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

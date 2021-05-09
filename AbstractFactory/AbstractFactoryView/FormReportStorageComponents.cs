@@ -48,18 +48,18 @@ namespace AbstractFactoryView
         {
             try
             {
-                var dict = logic.GetComponentsAircraft();
+                var dict = logic.GetComponentsStorage();
                 if (dict != null)
                 {
                     dataGridView.Rows.Clear();
                     foreach (var elem in dict)
                     {
-                        dataGridView.Rows.Add(new object[] { elem.AircraftName, "", "" });
+                        dataGridView.Rows.Add(new object[] { elem.Name, "", "" });
                         foreach (var listElem in elem.Components)
                         {
                             dataGridView.Rows.Add(new object[] { "", listElem.Item1, listElem.Item2 });
                         }
-                        dataGridView.Rows.Add(new object[] { "Итого", "", elem.TotalCount });
+                        dataGridView.Rows.Add(new object[] { "Итого", "", elem.Count });
                         dataGridView.Rows.Add(new object[] { });
                     }
                 }

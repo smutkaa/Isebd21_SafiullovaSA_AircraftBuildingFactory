@@ -158,5 +158,29 @@ namespace AbstractFactoryView
 			var form = Container.Resolve<FormClientOrders>();
 			form.ShowDialog();
 		}
+
+        private void списокСкладовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+			{
+				if (dialog.ShowDialog() == DialogResult.OK)
+				{
+					_report.SaveStorageToWordFile(new ReportBindingModel { FileName = dialog.FileName });
+					MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				}
+			}
+		}
+
+        private void компонентыНаСкладеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			var form = Container.Resolve<FormReportStorageComponents>();
+			form.ShowDialog();
+		}
+
+        private void сгрупированныToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			var form = Container.Resolve <FormAllOrders>();
+			form.ShowDialog();
+		}
     }
 }
