@@ -119,7 +119,7 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 		}
 		public void SaveStorageComponentToExcelFile(ReportBindingModel model)
 		{
-			SaveToExcel.CreateDoc(new ExcelInfo
+			SaveToExcel.CreateDocStorage(new ExcelInfoStorage
 			{
 				FileName = model.FileName,
 				Title = "Список складов",

@@ -104,6 +104,110 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 				workbookpart.Workbook.Save();
 			}
 		}
+		public static void CreateDocStorage(ExcelInfoStorage info)
+		{
+			using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(info.FileName, SpreadsheetDocumentType.Workbook))
+			{
+				WorkbookPart workbookPart = spreadsheetDocument.AddWorkbookPart();
+				workbookPart.Workbook = new Workbook();
+
+				CreateStyles(workbookPart);
+
+				SharedStringTablePart sharedStringPart = spreadsheetDocument.WorkbookPart.GetPartsOfType<SharedStringTablePart>().Count() > 0
+					? spreadsheetDocument.WorkbookPart.GetPartsOfType<SharedStringTablePart>().First()
+					: spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
+
+				if (sharedStringPart.SharedStringTable == null)
+				{
+					sharedStringPart.SharedStringTable = new SharedStringTable();
+				}
+
+				WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+				worksheetPart.Worksheet = new Worksheet(new SheetData());
+
+				Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild(new Sheets());
+				Sheet sheet = new Sheet
+				{
+					Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart),
+					SheetId = 1,
+					Name = "Лист"
+				};
+				sheets.Append(sheet);
+
+				InsertCellInWorksheet(new ExcelCellParameters
+				{
+					Worksheet = worksheetPart.Worksheet,
+					ShareStringPart = sharedStringPart,
+					ColumnName = "A",
+					RowIndex = 1,
+					Text = info.Title,
+					StyleIndex = 2U
+				});
+
+				MergeCells(new ExcelMergeParameters
+				{
+					Worksheet = worksheetPart.Worksheet,
+					CellFromName = "A1",
+					CellToName = "C1"
+				});
+
+				uint rowIndex = 2;
+
+				foreach (var storageComponent in info.StorageComponents)
+				{
+					InsertCellInWorksheet(new ExcelCellParameters
+					{
+						Worksheet = worksheetPart.Worksheet,
+						ShareStringPart = sharedStringPart,
+						ColumnName = "A",
+						RowIndex = rowIndex,
+						Text = storageComponent.Name,
+						StyleIndex = 0U
+					});
+
+					rowIndex++;
+
+					foreach (var material in storageComponent.Components)
+					{
+						InsertCellInWorksheet(new ExcelCellParameters
+						{
+							Worksheet = worksheetPart.Worksheet,
+							ShareStringPart = sharedStringPart,
+							ColumnName = "B",
+							RowIndex = rowIndex,
+							Text = material.Item1,
+							StyleIndex = 1U
+						});
+
+						InsertCellInWorksheet(new ExcelCellParameters
+						{
+							Worksheet = worksheetPart.Worksheet,
+							ShareStringPart = sharedStringPart,
+							ColumnName = "C",
+							RowIndex = rowIndex,
+							Text = material.Item2.ToString(),
+							StyleIndex = 1U
+						});
+
+						rowIndex++;
+					}
+
+					InsertCellInWorksheet(new ExcelCellParameters
+					{
+						Worksheet = worksheetPart.Worksheet,
+						ShareStringPart = sharedStringPart,
+						ColumnName = "C",
+						RowIndex = rowIndex,
+						Text = storageComponent.Count.ToString(),
+						StyleIndex = 0U
+					});
+
+					rowIndex++;
+				}
+
+				workbookPart.Workbook.Save();
+			}
+		}
 		/// <summary>
 		/// Настройка стилей для файла
 		/// </summary>
