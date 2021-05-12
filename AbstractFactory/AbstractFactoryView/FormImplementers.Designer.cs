@@ -106,6 +106,7 @@ namespace AbstractFactoryView
             this.Controls.Add(this.buttonAdd);
             this.Name = "FormImplementers";
             this.Text = "Исполнители";
+            this.Load += new System.EventHandler(this.FormImplementers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

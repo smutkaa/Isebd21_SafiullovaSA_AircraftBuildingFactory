@@ -14,7 +14,7 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
         {
             try
             {
-                folderName += "\\BackUp";
+                folderName += "\\BackUpFactory";
                 DirectoryInfo dirInfo = new DirectoryInfo(folderName);
                 if (dirInfo.Exists)
                 {
@@ -22,6 +22,10 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
                     {
                         file.Delete();
                     }
+                }
+                else
+                {
+                    Directory.CreateDirectory(folderName);
                 }
                 string fileName = $"{folderName}.zip";
                 if (File.Exists(fileName))
