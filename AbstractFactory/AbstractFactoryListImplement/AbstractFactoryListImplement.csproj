@@ -64,6 +64,8 @@
   <ItemGroup>
     <Compile Include="Implements\AircraftStorage.cs" />
     <Compile Include="Implements\ClientStorage.cs" />
+    <Compile Include="Implements\ImplementerStorage.cs" />
+    <Compile Include="Implements\MessageInfoStorage.cs" />
     <Compile Include="Implements\OrderStorage.cs" />
     <Compile Include="Models\Aircraft.cs" />
     <Compile Include="Models\Client.cs" />

@@ -78,10 +78,11 @@ namespace AbstractFactoryFileImplement.Implements
                 throw new Exception("Элемент не найден");
             }
         }
-
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.AircraftId = model.AircraftId;
+            order.ClientId = model.ClientId.Value;
+            order.ImplementerId = model.ImplementerId.Value;
             order.Status = model.Status;
             order.Sum = model.Sum;
             order.DateCreate = model.DateCreate;
@@ -92,27 +93,22 @@ namespace AbstractFactoryFileImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
-            string aircraftName = null;
-
-            foreach (var aircraft in source.Aircrafts)
-            {
-                if (aircraft.Id == order.AircraftId)
-                {
-                    aircraftName = aircraft.AircraftName;
-                }
-            }
-
             return new OrderViewModel
             {
                 Id = order.Id,
                 AircraftId = order.AircraftId,
+                ClientId = order.ClientId,
+                ImplementerId = order.ImplementerId,
                 Status = order.Status,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Count = order.Count,
-                AircraftName = aircraftName
+                AircraftName = source.Aircrafts.FirstOrDefault(rec => rec.Id == order.AircraftId)?.AircraftName,
+                ClientName = source.Clients.FirstOrDefault(rec => rec.Id == order.ClientId)?.ClientName,
+                ImplementerName = source.Implementers.FirstOrDefault(rec => rec.Id == order.ImplementerId)?.ImplementerName
             };
         }
+
     }
 }

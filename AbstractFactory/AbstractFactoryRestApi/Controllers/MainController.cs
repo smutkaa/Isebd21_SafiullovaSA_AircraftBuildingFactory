@@ -18,13 +18,11 @@ namespace AbstractFactoryRestApi.Controllers
 		private readonly OrderLogic _order;
 		private readonly AircraftLogic _aircraft;
 		private readonly OrderLogic _main;
-		//private readonly MailLogic _mail;
-		public MainController(OrderLogic order, AircraftLogic aircraft, OrderLogic main) //, MailLogic mail
+		public MainController(OrderLogic order, AircraftLogic aircraft, OrderLogic main) 
 		{
 			_order = order;
 			_aircraft = aircraft;
 			_main = main;
-			////_mail = mail;
 		}
 		[HttpGet]
 		public List<AircraftViewModel> GetAircraftList() => _aircraft.Read(null)?.ToList();
@@ -32,8 +30,6 @@ namespace AbstractFactoryRestApi.Controllers
 		public AircraftViewModel GetAircraft(int aircraftId) => _aircraft.Read(new AircraftBindingModel { Id = aircraftId })?[0];
 		[HttpGet]
 		public List<OrderViewModel> GetOrders(int clientId) => _order.Read(new OrderBindingModel { ClientId = clientId });
-		//[HttpGet]
-		//public List<MessageInfoViewModel> GetMessage(int clientId) => _mail.Read(new MessageInfoBindingModel { ClientId = clientId });
 		[HttpPost]
 		public void CreateOrder(CreateOrderBindingModel model) => _main.CreateOrder(model);
 	}

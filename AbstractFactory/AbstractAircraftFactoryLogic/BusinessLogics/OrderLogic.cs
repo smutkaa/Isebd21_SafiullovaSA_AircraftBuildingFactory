@@ -106,7 +106,7 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 			_orderStorage.Update(new OrderBindingModel
 			{
 				Id = order.Id,
-                AircraftId = order.AircraftId,
+        AircraftId = order.AircraftId,
 				Count = order.Count,
 				Sum = order.Sum,
 				DateCreate = order.DateCreate,
@@ -114,6 +114,7 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 				Status = OrderStatus.Готов,
 				ClientId = order.ClientId,
 				ImplementerId = order.ImplementerId
+
 			});
 			MailLogic.MailSendAsync(new MailSendInfo
 			{
