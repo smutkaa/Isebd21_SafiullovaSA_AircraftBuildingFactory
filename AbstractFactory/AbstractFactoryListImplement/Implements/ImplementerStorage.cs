@@ -1,5 +1,7 @@
 ﻿using AbstractAircraftFactoryLogic.BindingModels;
 using AbstractAircraftFactoryLogic.ViewModels;
+using AbstractAircraftFactoryLogic.Interfaces;
+
 using AbstractFactoryListImplement.Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AbstractFactoryListImplement.Implements
 {
-    public class ImplementerStorage
+    public class ImplementerStorage: IImplementerStorage
     {
         private readonly DataListSingleton source;
 

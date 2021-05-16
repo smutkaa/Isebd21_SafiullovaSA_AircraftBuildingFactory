@@ -39,7 +39,7 @@ namespace AbstractFactoryFileImplement.Implements
             {
                 return null;
             }
-            var client = source.Clients.FirstOrDefault(rec => rec.Id == model.Id);
+            var client = source.Clients.FirstOrDefault(rec => rec.Id == model.Id || rec.Login == model.Login);
             return client != null ? CreateModel(client) : null;
         }
 
