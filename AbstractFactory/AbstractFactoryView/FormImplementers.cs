@@ -35,11 +35,6 @@ namespace AbstractFactoryView
 			}
 		}
 
-		private void FormClients_Load(object sender, EventArgs e)
-		{
-			LoadData();
-		}
-
 		private void buttonAdd_Click(object sender, EventArgs e)
         {
 			var form = Container.Resolve<FormImplementer>();
@@ -86,5 +81,10 @@ namespace AbstractFactoryView
         {
 			LoadData();
 		}
-    }
+
+        private void FormImplementers_Load(object sender, EventArgs e)
+        {
+			LoadData();
+		}
+	}
 }

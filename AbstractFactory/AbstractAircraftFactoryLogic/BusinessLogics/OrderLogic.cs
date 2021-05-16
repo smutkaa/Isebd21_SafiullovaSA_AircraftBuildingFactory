@@ -78,7 +78,7 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 					DateImplement = DateTime.Now,
 					Status = OrderStatus.Выполняется,
 					ClientId = order.ClientId,
-					ImplementerId = model.ImplementerId,
+					ImplementerId = model.ImplementerId
 				});
 				MailLogic.MailSendAsync(new MailSendInfo
 				{
@@ -112,7 +112,8 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
 				DateCreate = order.DateCreate,
 				DateImplement = order.DateImplement,
 				Status = OrderStatus.Готов,
-				ClientId = order.ClientId
+				ClientId = order.ClientId,
+				ImplementerId = model.ImplementerId
 			});
 			MailLogic.MailSendAsync(new MailSendInfo
 			{
@@ -144,7 +145,8 @@ namespace AbstractAircraftFactoryLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Оплачен,
-				ClientId = order.ClientId
+				ClientId = order.ClientId,
+				ImplementerId = order.ImplementerId
 			});
 			MailLogic.MailSendAsync(new MailSendInfo
 			{

@@ -27,11 +27,6 @@ namespace AbstractFactoryView
 		{
 			LoadData();
 		}
-
-		public FormMain()
-		{
-			InitializeComponent();
-		}
 		private void LoadData()
 		{
 			try
@@ -104,7 +99,6 @@ namespace AbstractFactoryView
 				}
 			}
 		}
-
 		private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			var form = Container.Resolve<FormClientOrders>();

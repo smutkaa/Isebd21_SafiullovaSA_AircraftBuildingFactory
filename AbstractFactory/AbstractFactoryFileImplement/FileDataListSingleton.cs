@@ -27,6 +27,7 @@ namespace AbstractFactoryFileImplement
 		public List<Client> Clients { get; set; }
 		public List<Implementer> Implementers { get; set; }
 		public List<MessageInfo> MessageInfoes { get; set; }
+
 		private FileDataListSingleton()
 		{
 			Components = LoadComponents();
@@ -199,6 +200,7 @@ namespace AbstractFactoryFileImplement
 						Subject = elem.Element("Subject").Value,
 						Body = elem.Element("Body").Value,
 						DateDelivery = Convert.ToDateTime(elem.Element("DateDelivery").Value)
+						PauseTime = Convert.ToInt32(elem.Element("PauseTime").Value),
 					});
 				}
 			}
